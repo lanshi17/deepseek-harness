@@ -2,5 +2,5 @@
 # side as of the last confirmed-consistent state. Both languages carry equal authority;
 # after editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-14-bun-runtime-support-for-the-dsh-cli.md
-2026-08-14-bun-runtime-support-for-the-dsh-cli.md: 6931269f06c7b3fd89ea7b6a24580c5b5cac9d38
-2026-08-14-bun-runtime-support-for-the-dsh-cli.zh.md: 87a80ecf57a78b1ccbd86231526921c5ebec6e4e
+2026-08-14-bun-runtime-support-for-the-dsh-cli.md: 9c477d179427414a5d801466a06fbe0fa5c9d52a
+2026-08-14-bun-runtime-support-for-the-dsh-cli.zh.md: 6dda6f0c9d41c0dda65dcb4957c19ba362c515ed

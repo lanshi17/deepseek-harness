@@ -10,7 +10,7 @@ English | [中文](2026-08-14-bun-runtime-support-for-the-dsh-cli.zh.md)
 
 ## Decision
 
-The published dsh family now runs under bun. `bunx @deepseek-ai/dsh web` boots the web profile and serves the browser UI; `--version` and app `--help` work; the packed-install flow was verified end to end with bun (see Testing).
+The published dsh family now runs under the bun runtime. `bunx --bun @deepseek-ai/dsh web` (the bun runtime — plain `bunx` executes the bin with the system Node by default, which already works) boots the web profile and serves the browser UI; `--version` and app `--help` work; the packed-install flow was verified end to end with the bun runtime (see Testing).
 
 **Bare plugin resolution without the internal loader.** Node's internal `ModuleLoader` scopes bare imports to `ctx.baseUrl` (the config/profile directory, plus the healed `profiles/node_modules` fallback); bun's `node:module` polyfill exposes no internal loader, so the loader's fallback branch now resolves bare names from `ctx.baseUrl` with `createRequire(baseUrl).resolve(name)` before importing the file URL ([vendored `tree.ts` change](../../../../vendor/README.md), modification #19). The app-boot closed-runtime override (`HostResolvedRootInclude`, used when an embedder passes `bareModuleBaseUrl`) resolves bare names from that host base the same way instead of delegating to the loader-location fallback.
 
@@ -34,7 +34,7 @@ The published dsh family now runs under bun. `bunx @deepseek-ai/dsh web` boots t
 
 ## Consequences
 
-- `bunx @deepseek-ai/dsh web` and `bunx dsh web` (global bun install) work; Node behavior is unchanged (builtin stripper, real computeMs poll, pipe capture backstop all take their previous paths).
+- `bunx --bun @deepseek-ai/dsh web` and `bunx dsh web` (global bun install; bunx itself defaults to the system Node, which also works) run under the bun runtime; Node behavior is unchanged (builtin stripper, real computeMs poll, pipe capture backstop all take their previous paths).
 - Two vendored packages gained logged local modifications (#19 loader, #20 hmr); the sync procedure must re-apply them.
 - `dsh-code-runtime-worker-thread` gains an `amaro` dependency (WASM stripper, loaded only on runtimes without the builtin).
 - Under bun: `computeMs` is unenforced (wall ceiling backstops), and native-level worker writes that bypass the patched stream slots are not captured into run logs.
@@ -43,6 +43,6 @@ The published dsh family now runs under bun. `bunx @deepseek-ai/dsh web` boots t
 ## Testing
 
 - `resolveStripper` unit tests: builtin preferred, amaro strip-only fallback, diagnostic normalization, no-stripper rejection.
-- Bundled `code-runtime` exercised under bun: erasable program with bindings/logs, `enum` rejection with the canonical message, wall-clock ceiling enforcement.
-- `dsh web` booted under bun from the repo (bundled bins) and from a fresh `bun install` of the packed release family (221 tarballs): HTTP 200, app HTML and assets served, `--version`/`--help` correct.
+- Bundled `code-runtime` exercised under the bun runtime: erasable program with bindings/logs, `enum` rejection with the canonical message, wall-clock ceiling enforcement.
+- `dsh web` booted under the bun runtime from the repo (bundled bins) and from a fresh `bun install` of the packed dsh and vendor release families (221 + 9 tarballs): HTTP 200, app HTML and assets served, `--version`/`--help` correct. The bin was executed directly with `bun` (bunx defaults to the system Node, so the direct run is the bun-runtime proof).
 - Pre-publish bun installs need `overrides` pinning each family tarball: bun resolves transitive `devDependencies` of installed packages from the registry and does not satisfy transitive ranges from direct `file:` deps; the published registry state resolves without them. node-pty's `node-gyp` build needs `node-gyp` on PATH (npm bundles it, bun does not).

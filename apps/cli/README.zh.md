@@ -53,7 +53,8 @@ dsh web                           # 启动浏览器 UI；web profile 在首次�
 
 ```sh
 npx @deepseek-ai/dsh web
-bunx @deepseek-ai/dsh web
+bunx @deepseek-ai/dsh web          # 用系统 Node 执行 bin
+bunx --bun @deepseek-ai/dsh web    # 用 bun 运行时执行 bin
 ```
 
 打包后的 CLI 可在 Node（`^22.19 || >=24`）与 bun 下运行。bun 下的差异：code-runtime 能力通过 amaro 剥离类型，且只执行墙钟上限（bun 不提供事件循环占用率）；profile 配置热重载在仅监听模式下仍可用（参见 [`dsh-code-runtime-worker-thread`](../../packages/code-runtime/code-runtime-worker-thread/README.md) 与 [`vendor/README.md`](../../vendor/README.md) 中的 vendored loader 说明）。

@@ -10,7 +10,7 @@ Status: implemented
 
 ## Decision
 
-已发布的 dsh 系列现在可以在 bun 下运行。`bunx @deepseek-ai/dsh web` 可以启动 web profile 并对外提供浏览器 UI；`--version` 与应用 `--help` 均可用；已用 bun 对打包安装流程做了端到端验证（见 Testing）。
+已发布的 dsh 系列现在可以在 bun 运行时下运行。`bunx --bun @deepseek-ai/dsh web`（bun 运行时——普通 `bunx` 默认用系统 Node 执行 bin，那条路径本来就能用）可以启动 web profile 并对外提供浏览器 UI；`--version` 与应用 `--help` 均可用；已用 bun 运行时对打包安装流程做了端到端验证（见 Testing）。
 
 **没有内部 loader 时的裸插件解析。** Node 的内部 `ModuleLoader` 会把裸 import 限定在 `ctx.baseUrl`（配置／profile 目录，以及修复后的 `profiles/node_modules` 回退）；bun 的 `node:module` polyfill 不导出内部 loader，因此 loader 的回退分支现在先用 `createRequire(baseUrl).resolve(name)` 从 `ctx.baseUrl` 解析裸名称，再导入解析出的文件 URL（[vendored `tree.ts` 修改](../../../../vendor/README.md)，修改 #19）。app-boot 的封闭运行时覆盖（`HostResolvedRootInclude`，当嵌入方传入 `bareModuleBaseUrl` 时使用）也以同样方式从该宿主基址解析裸名称，而不再委托给 loader 位置的回退。
 
@@ -34,7 +34,7 @@ Status: implemented
 
 ## Consequences
 
-- `bunx @deepseek-ai/dsh web` 与 `bunx dsh web`（bun 全局安装）均可用；Node 行为不变（内置剥离器、真实 computeMs 轮询、pipe 捕获兜底都走原路径）。
+- `bunx --bun @deepseek-ai/dsh web` 与 `bunx dsh web`（bun 全局安装；bunx 本身默认使用系统 Node，那条路径同样可用）在 bun 运行时下运行；Node 行为不变（内置剥离器、真实 computeMs 轮询、pipe 捕获兜底都走原路径）。
 - 两个 vendored 包新增了已记录的本地修改（loader #19、hmr #20）；同步流程必须重新应用它们。
 - `dsh-code-runtime-worker-thread` 新增 `amaro` 依赖（WASM 剥离器，只在没有内置函数的运行时加载）。
 - bun 下：`computeMs` 不生效（由墙钟上限兜底），绕过补丁 stream 槽的原生级 worker 写入不会进入运行日志。
@@ -43,6 +43,6 @@ Status: implemented
 ## Testing
 
 - `resolveStripper` 单元测试：优先内置函数、amaro strip-only 回退、诊断归一化、两种剥离器都缺失时报错。
-- 在 bun 下运行打包后的 `code-runtime`：可擦除程序（绑定＋日志）、`enum` 拒绝且消息规范、墙钟上限生效。
-- 在 bun 下从仓库（打包 bin）以及从发布系列的打包安装（221 个 tarball，全新 `bun install`）启动 `dsh web`：HTTP 200，应用 HTML 与资源可访问，`--version`／`--help` 正确。
+- 在 bun 运行时下运行打包后的 `code-runtime`：可擦除程序（绑定＋日志）、`enum` 拒绝且消息规范、墙钟上限生效。
+- 在 bun 运行时下从仓库（打包 bin）以及从打包的 dsh 与 vendor 发布系列（221＋9 个 tarball，全新 `bun install`）启动 `dsh web`：HTTP 200，应用 HTML 与资源可访问，`--version`／`--help` 正确。bin 直接用 `bun` 执行（bunx 默认使用系统 Node，因此直接运行才是 bun 运行时的证据）。
 - 发布前用 bun 安装需要 `overrides` 把每个系列 tarball 钉住：bun 会从 registry 解析已装包的传递 `devDependencies`，且不会用直接的 `file:` 依赖满足传递范围；发布后的 registry 状态无需这些即可解析。node-pty 的 `node-gyp` 构建需要 PATH 上有 `node-gyp`（npm 自带，bun 不带）。
