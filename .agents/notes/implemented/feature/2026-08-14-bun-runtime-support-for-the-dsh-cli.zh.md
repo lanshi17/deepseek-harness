@@ -12,7 +12,7 @@ Status: implemented
 
 已发布的 dsh 系列现在可以在 bun 运行时下运行。`bunx --bun @deepseek-ai/dsh web`（bun 运行时——普通 `bunx` 默认用系统 Node 执行 bin，那条路径本来就能用）可以启动 web profile 并对外提供浏览器 UI；`--version` 与应用 `--help` 均可用；已用 bun 运行时对打包安装流程做了端到端验证（见 Testing）。
 
-**没有内部 loader 时的裸插件解析。** Node 的内部 `ModuleLoader` 会把裸 import 限定在 `ctx.baseUrl`（配置／profile 目录，以及修复后的 `profiles/node_modules` 回退）；bun 的 `node:module` polyfill 不导出内部 loader，因此 loader 的回退分支现在先用 `createRequire(baseUrl).resolve(name)` 从 `ctx.baseUrl` 解析裸名称，再导入解析出的文件 URL（[vendored `tree.ts` 修改](../../../../vendor/README.md)，修改 #19）。app-boot 的封闭运行时覆盖（`HostResolvedRootInclude`，当嵌入方传入 `bareModuleBaseUrl` 时使用）也以同样方式从该宿主基址解析裸名称，而不再委托给 loader 位置的回退。
+**没有内部 loader 时的裸插件解析。** Node 的内部 `ModuleLoader` 会把裸 import 限定在 `ctx.baseUrl`（配置／profile 目录，以及修复后的 `profiles/node_modules` 回退）；bun 的 `node:module` polyfill 不导出内部 loader，因此 loader 的回退分支现在先用 `createRequire(baseUrl).resolve(name)` 从 `ctx.baseUrl` 解析裸名称，再导入解析出的文件 URL（[vendored `tree.ts` 修改](../../../../vendor/README.md)，修改 #19）。`node:module`／`node:url` 的导入是惰性的（在回退分支内 `await import()`），因为该入口同时是浏览器 client 入口：顶层 node 内建导入会破坏 web 应用的 vite 构建（它会把 loader 浏览器化，`node:module` 在 `apps/web/vite.config.ts` 中被别名到抛错 stub）；浏览器永远不会执行裸名称分支。app-boot 的封闭运行时覆盖（`HostResolvedRootInclude`，当嵌入方传入 `bareModuleBaseUrl` 时使用）也以同样方式从该宿主基址解析裸名称，而不再委托给 loader 位置的回退。
 
 **没有内部 loader 时的 HMR 仅监听模式。** 对内部 loader 的要求被限定在已配置的模块根：`root: []`（即 dsh CLI 的仅监听式用户 patch 层热重载）不再抛错，初始化时的 externals 收集在没有 loader 时会跳过（[vendored `hmr` 修改](../../../../vendor/README.md)，修改 #20）。模块监听路径保持不变，仍由「有模块根必有内部 loader」这一不变量守护。
 

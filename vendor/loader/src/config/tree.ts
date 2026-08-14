@@ -1,5 +1,3 @@
-import { createRequire } from 'node:module'
-import { pathToFileURL } from 'node:url'
 import { composeError, Context } from '@deepseek-ai/cordis'
 import { isNonNullable, type Dict } from '@deepseek-ai/cosmokit'
 import { Entry, type EntryOptions } from './entry.ts'
@@ -163,6 +161,12 @@ export abstract class EntryTree {
         // root a require there so bare specifiers keep resolving from the
         // config directory — and from any module fallback a launcher heals
         // beside it — instead of from this loader module's own location.
+        // The imports are lazy because this entry doubles as the browser
+        // client entry, where node builtins must not appear at top level;
+        // the browser never reaches this branch (createRequire resolves to
+        // the web app's throwing stub), and Node/bun cache the modules.
+        const { createRequire } = await import('node:module')
+        const { pathToFileURL } = await import('node:url')
         const resolved = createRequire(new URL(this.ctx.baseUrl!)).resolve(name)
         return await import(/* @vite-ignore */resolved.startsWith('file:') ? resolved : pathToFileURL(resolved).href)
       }
