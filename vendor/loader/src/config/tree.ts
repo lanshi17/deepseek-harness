@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module'
+import { pathToFileURL } from 'node:url'
 import { composeError, Context } from '@deepseek-ai/cordis'
 import { isNonNullable, type Dict } from '@deepseek-ai/cosmokit'
 import { Entry, type EntryOptions } from './entry.ts'
@@ -156,7 +158,13 @@ export abstract class EntryTree {
       } else if (name.startsWith('.')) {
         return await import(/* @vite-ignore */new URL(name, this.ctx.baseUrl).href)
       } else {
-        return await import(/* @vite-ignore */name)
+        // Node's internal loader resolves bare names against `ctx.baseUrl`;
+        // without it (bun's node:module polyfill exposes no internal loader),
+        // root a require there so bare specifiers keep resolving from the
+        // config directory — and from any module fallback a launcher heals
+        // beside it — instead of from this loader module's own location.
+        const resolved = createRequire(new URL(this.ctx.baseUrl!)).resolve(name)
+        return await import(/* @vite-ignore */resolved.startsWith('file:') ? resolved : pathToFileURL(resolved).href)
       }
     }, getOuterStack)
   }

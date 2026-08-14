@@ -122,7 +122,7 @@ function directoryEntries(
 ): LlmConfigurableProvider[] {
   const catalog = new Set(catalogProviderIds())
   const entries = new Map<string, LlmConfigurableProvider>()
-  const declare = (provider: string, displayName: string): void => {
+  const declareProvider = (provider: string, displayName: string): void => {
     entries.set(provider, {
       provider,
       displayName,
@@ -137,12 +137,12 @@ function directoryEntries(
   // A provider whose only native method is OAuth leaves this adapter nothing
   // to authenticate with, so offering it would put a card on the settings page
   // whose own posture — no key, credentials discovered by the provider — fails
-  // every request. Catalog *membership* is unaffected, so `declare` above still
-  // answers what pi-ai ships.
+  // every request. Catalog *membership* is unaffected, so `declareProvider`
+  // above still answers what pi-ai ships.
   for (const provider of catalog) {
-    if (catalogProviderTakesApiKey(provider)) declare(provider, provider)
+    if (catalogProviderTakesApiKey(provider)) declareProvider(provider, provider)
   }
-  for (const [provider, profile] of profiles) declare(provider, profile.displayName)
+  for (const [provider, profile] of profiles) declareProvider(provider, profile.displayName)
   return [...entries.values()]
 }
 

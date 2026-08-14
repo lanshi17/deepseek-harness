@@ -42,6 +42,22 @@ profile 目录包含一个 `package.json`，其中记录树外插件依赖，以
 
 层的确切优先级、flag、关闭行为、部署默认值和源码执行方式，以 [CLI（命令行界面）行为参考](reference/README.md)为准。
 
+## 安装与运行
+
+```sh
+npm i -g @deepseek-ai/dsh        # 或：bun add -g @deepseek-ai/dsh
+dsh web                           # 启动浏览器 UI；web profile 在首次使用时自动初始化
+```
+
+不做全局安装时，包运行器会执行同一个 bin：
+
+```sh
+npx @deepseek-ai/dsh web
+bunx @deepseek-ai/dsh web
+```
+
+打包后的 CLI 可在 Node（`^22.19 || >=24`）与 bun 下运行。bun 下的差异：code-runtime 能力通过 amaro 剥离类型，且只执行墙钟上限（bun 不提供事件循环占用率）；profile 配置热重载在仅监听模式下仍可用（参见 [`dsh-code-runtime-worker-thread`](../../packages/code-runtime/code-runtime-worker-thread/README.md) 与 [`vendor/README.md`](../../vendor/README.md) 中的 vendored loader 说明）。
+
 ## 开发
 
 生产运行需要已构建的包与前端产物。请在仓库根目录单独运行 `pnpm run build`，然后使用 `pnpm dsh <args...>` 运行 TypeScript 入口并转发所有参数；模块解析约定以[源码执行参考](reference/README.md#source-execution)为准。

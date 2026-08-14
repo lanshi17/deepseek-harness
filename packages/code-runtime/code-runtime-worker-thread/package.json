@@ -43,7 +43,8 @@
     "@deepseek-ai/cordis": "workspace:^"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "workspace:^"
+    "@deepseek-ai/schemastery": "workspace:^",
+    "amaro": "^1.1.11"
   },
   "devDependencies": {
     "@deepseek-ai/dsh-code-runtime": "workspace:^",

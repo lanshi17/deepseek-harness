@@ -6,6 +6,7 @@
  * @module @deepseek-ai/dsh-app-boot
  */
 
+import { createRequire } from 'node:module'
 import { pathToFileURL } from 'node:url'
 import { readFileSync } from 'node:fs'
 import { parseEnv } from 'node:util'
@@ -496,9 +497,15 @@ export async function mountRootInclude(
         const specifier = isAbsolute(name) ? pathToFileURL(name).href : name
         if (name.startsWith('.') || name.startsWith('cordis:')) return super.import(specifier, getOuterStack)
         const internal = this.ctx.loader.internal
-        /* v8 ignore next -- Node supplies the internal loader; this preserves the
-           original diagnostic for hypothetical embedders without it. */
-        if (internal === undefined) return super.import(specifier, getOuterStack)
+        /* v8 ignore start -- Node always supplies the internal loader; bun's node:module polyfill does not, and vitest runs Node */
+        if (internal === undefined) {
+          // No Node internal loader (bun): resolve the bare name from the
+          // installed host base, the same parent walk the internal loader
+          // would perform, instead of the loader module's own location.
+          const resolved = createRequire(bareModuleBaseUrl).resolve(specifier)
+          return import(resolved.startsWith('file:') ? resolved : pathToFileURL(resolved).href)
+        }
+        /* v8 ignore stop */
         return internal.import(specifier, bareModuleBaseUrl, {})
       }
     }

@@ -42,6 +42,22 @@ Use `--dump-default-config` and `--dump-config` to inspect the composed tree wit
 
 The [CLI behavior reference](reference/README.md) owns exact layer precedence, flags, shutdown behavior, deployment defaults, and source execution.
 
+## Install and run
+
+```sh
+npm i -g @deepseek-ai/dsh        # or: bun add -g @deepseek-ai/dsh
+dsh web                           # serve the browser UI; the web profile auto-initializes on first use
+```
+
+Without a global install, a package runner executes the same bin:
+
+```sh
+npx @deepseek-ai/dsh web
+bunx @deepseek-ai/dsh web
+```
+
+The bundled CLI runs under Node (`^22.19 || >=24`) and under bun. Bun differences: the code-runtime capability strips types through amaro and enforces only its wall-clock ceiling (bun exposes no event-loop utilization), and profile configuration hot-reload stays available in watch-only mode (see [`dsh-code-runtime-worker-thread`](../../packages/code-runtime/code-runtime-worker-thread/README.md) and the vendored-loader note in [`vendor/README.md`](../../vendor/README.md)).
+
 ## Development
 
 Production runs require built package and frontend artifacts. From the repository root, run `pnpm run build` separately, then use `pnpm dsh <args...>` to run the TypeScript entry and forward every argument; the [source-execution reference](reference/README.md#source-execution) owns the module-resolution contract.

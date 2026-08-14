@@ -117,10 +117,15 @@ class Hmr extends Service {
 
   constructor(ctx: Context, public config: Hmr.Config) {
     super(ctx, 'hmr')
-    if (!this.ctx.loader.internal) {
-      throw new Error('--expose-internals is required for HMR service')
+    // Module watching reads Node's internal module loader. Watch-only config
+    // reloads (`root: []`) need no internals and stay available on runtimes
+    // without one (bun's node:module polyfill exposes no internal loader).
+    if (!this.ctx.loader.internal && this.config.root.length > 0) {
+      throw new Error('--expose-internals is required for HMR service with module roots')
     }
-    this.internal = this.ctx.loader.internal
+    // Module watching below dereferences the internal loader; configured
+    // module roots are exactly what the guard above makes it exist for.
+    this.internal = this.ctx.loader.internal!
     this.baseDir = fileURLToPath(new URL(config.base || '.', ctx.baseUrl))
   }
 
@@ -217,10 +222,16 @@ class Hmr extends Service {
 
     // Collect externals before opening the watcher so every post-ready change
     // is observed by listeners that already have their classification state.
-    const mainUrl = pathToFileURL(resolve(process.argv[1])).href
-    const mainJob = this.internal.loadCache.get(mainUrl)
-    if (mainJob) {
-      this.externals = await loadDependencies(mainJob)
+    // Without the internal loader (bun, watch-only config reloads) there are
+    // no module roots to classify, so the sets stay empty.
+    if (this.ctx.loader.internal) {
+      const mainUrl = pathToFileURL(resolve(process.argv[1])).href
+      const mainJob = this.ctx.loader.internal.loadCache.get(mainUrl)
+      if (mainJob) {
+        this.externals = await loadDependencies(mainJob)
+      } else {
+        this.externals = new Set()
+      }
     } else {
       this.externals = new Set()
     }

@@ -7,7 +7,7 @@
  */
 
 import { Worker } from 'node:worker_threads'
-import { stripTypeScriptTypes } from 'node:module'
+import { createRequire } from 'node:module'
 import type { Readable } from 'node:stream'
 import { fileURLToPath } from 'node:url'
 import { Context } from '@deepseek-ai/cordis'
@@ -82,6 +82,65 @@ const IDENTIFIER = /^[A-Za-z_][A-Za-z0-9_]*$/
  * line/column positions intact.
  */
 const STRIP_WRAP = { prefix: 'async function __dsh_program__() {\n', suffix: '\n}' } as const
+
+const require = createRequire(import.meta.url)
+
+/** The strip-only transform amaro exposes; its `code` output is position-preserving. */
+interface AmaroTransformSync {
+  transformSync?(source: string, options?: { mode?: 'strip-only' }): { code: string }
+}
+
+/** The `node:module` surface this package reads. */
+interface NodeModuleStripper {
+  stripTypeScriptTypes?(code: string): string
+}
+
+/**
+ * Resolve the type-strip implementation: Node's `node:module`
+ * `stripTypeScriptTypes` builtin where exported, else the amaro WASM
+ * stripper that builtin wraps. Both share the semantics this seam relies on
+ * (erasable syntax only, positions preserved, `enum`/namespace rejected);
+ * bun's `node:module` polyfill exports no stripper, so bun runs amaro.
+ * Injectable sources keep the fallback testable under Node.
+ * @param nodeModule - the `node:module` exports to read the builtin from.
+ * @param amaro - the `amaro` package exports; resolved lazily only when the builtin is absent.
+ * @returns a function stripping a program's type annotations in place.
+ */
+export function resolveStripper(
+  nodeModule: NodeModuleStripper = require('node:module') as NodeModuleStripper,
+  amaro?: AmaroTransformSync,
+): (code: string) => string {
+  const builtin = nodeModule.stripTypeScriptTypes
+  if (typeof builtin === 'function') return builtin
+  /* v8 ignore next -- the amaro package is required only on runtimes without the builtin (bun); Node tests inject it */
+  const transformSync = (amaro ?? require('amaro') as AmaroTransformSync).transformSync
+  if (typeof transformSync !== 'function') {
+    throw new Error('dsh-code-runtime-worker-thread: no usable TypeScript stripper (node:module stripTypeScriptTypes and amaro both absent)')
+  }
+  return (code) => {
+    try {
+      return transformSync(code, { mode: 'strip-only' }).code
+    } catch (error) {
+      // amaro's transformSync throws a plain diagnostic object (code,
+      // message, snippet), while Node's builtin throws an Error; normalize so
+      // the seam sees one throw shape.
+      const message = error instanceof Error ? error.message : String((error as { message?: unknown } | null)?.message ?? error)
+      throw new Error(message)
+    }
+  }
+}
+
+/** The stripper this runtime uses, resolved once at load. */
+const STRIP = resolveStripper()
+
+/**
+ * Whether this runtime can measure worker event-loop utilization. Node's
+ * worker_threads exposes the real metric the `computeMs` budget reads; bun's
+ * worker_threads stub reports all-zero utilization (`ERR_NOT_IMPLEMENTED`),
+ * which would silently never expire the budget — so under bun the poll is
+ * skipped and the wall-clock ceiling backstops instead.
+ */
+const CAN_MEASURE_ELU = process.versions.bun === undefined
 
 /** One in-flight run's host-side state, tracked for disposal. */
 interface LiveRun {
@@ -268,6 +327,10 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
       throw new Error(`dsh-code-runtime-worker-thread: config.maxWallMs must be at most ${MAX_TIMER_DELAY_MS} (Node clamps a longer setTimeout delay to 1ms), got ${String(this.config.maxWallMs)}`)
     }
     ctx.effect(() => () => this.teardown(), 'worker code-runtime teardown')
+    /* v8 ignore next -- bun-only warning; Node always measures event-loop utilization */
+    if (!CAN_MEASURE_ELU) {
+      ctx.logger.warn('code-runtime: computeMs busy-time budget is not enforced (this runtime exposes no event-loop utilization); the wall-clock ceiling still applies')
+    }
   }
 
   /**
@@ -299,7 +362,7 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
 
     let code: string
     try {
-      const stripped = stripTypeScriptTypes(STRIP_WRAP.prefix + request.program + STRIP_WRAP.suffix)
+      const stripped = STRIP(STRIP_WRAP.prefix + request.program + STRIP_WRAP.suffix)
       code = stripped.slice(STRIP_WRAP.prefix.length, stripped.length - STRIP_WRAP.suffix.length)
     } catch (error: unknown) {
       // A program that does not survive the type-strip (syntax error,
@@ -403,7 +466,15 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
       // Pipe and message-port delivery are independent. Continue bounded pipe
       // capture after a terminal message while worker termination drains bytes
       // that were already queued; `finish` materializes the result only after
-      // termination completes.
+      // termination completes. The bootstrap patches JS-level writes into its
+      // own ordered buffer; these pipes are a backstop for native-level writes
+      // the patch cannot see. bun's worker_threads offers no capture streams
+      // (its Worker `stdout`/`stderr` options are unimplemented and yield
+      // null), so the backstop is skipped there and such writes reach the
+      // host's own stdio instead.
+      /* v8 ignore next -- bun yields null capture streams; Node always provides them */
+      const captureStreams = [worker.stdout, worker.stderr]
+        .filter((stream): stream is Readable => stream !== null)
       const captureStray = (chunk: Buffer): void => {
         /* v8 ignore next -- a second post-overflow chunk races immediate worker termination; the first overflow path is covered. */
         if (terminalOverride !== undefined) return
@@ -414,8 +485,7 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
           finish(limited)
         }
       }
-      worker.stdout.on('data', captureStray)
-      worker.stderr.on('data', captureStray)
+      for (const stream of captureStreams) stream.on('data', captureStray)
 
       // Exactly one outcome wins. Every path cleans up, terminates, and awaits the worker;
       // logs captured before timeout, abort, or failure remain in the result.
@@ -424,16 +494,16 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
       const finish = (finalize: CodeRunResult | (() => CodeRunResult)): void => {
         if (settled) return
         settled = true
-        clearInterval(eluTimer)
+        /* v8 ignore next -- the poll is never started under bun, so this never sees an undefined timer under Node */
+        if (eluTimer !== undefined) clearInterval(eluTimer)
         clearTimeout(wallTimer)
         request.signal?.removeEventListener('abort', onAbort)
         this.live.delete(live)
         // Let the poll phase deliver pipe bytes already queued independently
         // of the terminal port message before termination closes the streams.
         void new Promise<void>((resume) => { setImmediate(resume) }).then(async () => {
-          const stdoutDrained = waitForPipeDrain(worker.stdout)
-          const stderrDrained = waitForPipeDrain(worker.stderr)
-          await Promise.all([worker.terminate(), stdoutDrained, stderrDrained])
+          const pipeDrains = captureStreams.map(stream => waitForPipeDrain(stream))
+          await Promise.all([worker.terminate(), ...pipeDrains])
           const result = terminalOverride ?? (typeof finalize === 'function' ? finalize() : finalize)
           finishResolve()
           resolve(result)
@@ -533,13 +603,19 @@ export class WorkerThreadCodeRuntime extends CodeRuntime {
 
       // The compute budget reads the worker's own measured busy time, so a
       // hot loop expires it no matter what dispatches are in flight, while a
-      // program idling on a slow binding accrues nothing.
-      const eluTimer = setInterval(() => {
-        const elu = worker.performance.eventLoopUtilization()
-        if (elu.active > this.config.computeMs) {
-          finish(() => output.failure([...logs, ...strayLogs], { kind: 'timeout', message: `compute budget exhausted (${this.config.computeMs}ms busy)` }))
-        }
-      }, ELU_POLL_INTERVAL_MS)
+      // program idling on a slow binding accrues nothing. Skipped under bun,
+      // whose worker_threads reports no real utilization (see
+      // CAN_MEASURE_ELU); the wall-clock ceiling below still backstops.
+      let eluTimer: NodeJS.Timeout | undefined
+      /* v8 ignore next -- bun skips the poll (no event-loop utilization); Node always measures */
+      if (CAN_MEASURE_ELU) {
+        eluTimer = setInterval(() => {
+          const elu = worker.performance.eventLoopUtilization()
+          if (elu.active > this.config.computeMs) {
+            finish(() => output.failure([...logs, ...strayLogs], { kind: 'timeout', message: `compute budget exhausted (${this.config.computeMs}ms busy)` }))
+          }
+        }, ELU_POLL_INTERVAL_MS)
+      }
       const wallTimer = setTimeout(() => {
         finish(() => output.failure([...logs, ...strayLogs], { kind: 'timeout', message: `wall-clock ceiling reached (${this.config.maxWallMs}ms)` }))
       }, this.config.maxWallMs)
