@@ -1,14 +1,14 @@
 /**
  * Package-owned request-reconstruction invariant for loop-built LLM calls.
- * @module @deepseek-ai/dsh-agent-loop/invariant
+ * @module @lanshi17/dsh-agent-loop/invariant
  */
 
-import type { Context } from '@deepseek-ai/cordis'
-import { isAgentLoopRequest, type GenerateOptions } from '@deepseek-ai/dsh-llm'
-import type { InvariantFailure, InvariantInstaller } from '@deepseek-ai/dsh-invariants'
-import { foldRequestHeader } from '@deepseek-ai/dsh-session'
+import type { Context } from '@lanshi17/cordis'
+import { isAgentLoopRequest, type GenerateOptions } from '@lanshi17/dsh-llm'
+import type { InvariantFailure, InvariantInstaller } from '@lanshi17/dsh-invariants'
+import { foldRequestHeader } from '@lanshi17/dsh-session'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-agent-loop'
+const PACKAGE_NAME = '@lanshi17/dsh-agent-loop'
 
 /** Cordis companion plugin name. */
 export const name = 'agent-loop-invariant'

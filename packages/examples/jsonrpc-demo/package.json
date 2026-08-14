@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-sdk-jsonrpc-demo",
+  "name": "@lanshi17/dsh-sdk-jsonrpc-demo",
   "description": "Bin that boots an external Cordis config for the stdio JSON-RPC SDK runtime",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -45,14 +45,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@deepseek-ai/dsh-app-boot": "workspace:^"
+    "@lanshi17/dsh-app-boot": "workspace:^"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

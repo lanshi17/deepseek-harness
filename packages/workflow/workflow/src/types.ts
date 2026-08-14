@@ -3,11 +3,11 @@
  * consumes and produces, plus the fields in the `workflow/*` event payloads.
  * Types only (plus the id-brand factory), per the package convention.
  *
- * @module @deepseek-ai/dsh-workflow/types
+ * @module @lanshi17/dsh-workflow/types
  */
 
-import type { Branded } from '@deepseek-ai/dsh-brand'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
+import type { Branded } from '@lanshi17/dsh-brand'
+import type { SessionId } from '@lanshi17/dsh-session/types'
 
 /** Identifies one workflow run. */
 export type WorkflowRunId = Branded<'WorkflowRunId'>

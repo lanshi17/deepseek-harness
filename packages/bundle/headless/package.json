@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-headless",
+  "name": "@lanshi17/dsh-headless",
   "description": "The dsh one-shot bundle: a direct core Agent/Session runner over dsh-base with no Host, HTTP, or browser layer",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -44,27 +44,27 @@
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-cmdline": "workspace:^",
-    "@deepseek-ai/dsh-code-runtime-worker-thread": "workspace:^",
-    "@deepseek-ai/schemastery": "workspace:^",
+    "@lanshi17/dsh-cmdline": "workspace:^",
+    "@lanshi17/dsh-code-runtime-worker-thread": "workspace:^",
+    "@lanshi17/schemastery": "workspace:^",
     "commander": "^15.0.0"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis-plugin-loader": "workspace:^",
-    "@deepseek-ai/dsh-agent": "workspace:^",
-    "@deepseek-ai/dsh-agent-default-model": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/cordis-plugin-loader": "workspace:^",
+    "@lanshi17/dsh-agent": "workspace:^",
+    "@lanshi17/dsh-agent-default-model": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis-plugin-loader": "workspace:^",
-    "@deepseek-ai/dsh-agent": "workspace:^",
-    "@deepseek-ai/dsh-agent-default-model": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/cordis-plugin-loader": "workspace:^",
+    "@lanshi17/dsh-agent": "workspace:^",
+    "@lanshi17/dsh-agent-default-model": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

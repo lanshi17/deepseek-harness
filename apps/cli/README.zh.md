@@ -1,4 +1,4 @@
-# `@deepseek-ai/dsh`
+# `@lanshi17/dsh`
 
 [English](README.md) | 中文
 
@@ -36,7 +36,7 @@ profile 目录包含一个 `package.json`，其中记录树外插件依赖，以
 - profile 自身的 `cordis.patch.yml`，然后是 home 级的 `$DSH_HOME/cordis.patch.yml`
 - `--patch` 指定的覆盖层
 
-`dsh.profile.bundles` 中列出的组合包先从 dsh 安装目录解析（`@deepseek-ai/dsh-base`、`@deepseek-ai/dsh-web-app`、`@deepseek-ai/dsh-headless`），再从 profile 自身的 `node_modules` 解析；pnpm 会将树外插件安装到该目录。
+`dsh.profile.bundles` 中列出的组合包先从 dsh 安装目录解析（`@lanshi17/dsh-base`、`@lanshi17/dsh-web-app`、`@lanshi17/dsh-headless`），再从 profile 自身的 `node_modules` 解析；pnpm 会将树外插件安装到该目录。
 
 使用 `--dump-default-config` 和 `--dump-config` 可在不启动的情况下检查组合后的配置树。
 
@@ -45,16 +45,16 @@ profile 目录包含一个 `package.json`，其中记录树外插件依赖，以
 ## 安装与运行
 
 ```sh
-npm i -g @deepseek-ai/dsh        # 或：bun add -g @deepseek-ai/dsh
+npm i -g @lanshi17/dsh        # 或：bun add -g @lanshi17/dsh
 dsh web                           # 启动浏览器 UI；web profile 在首次使用时自动初始化
 ```
 
 不做全局安装时，包运行器会执行同一个 bin：
 
 ```sh
-npx @deepseek-ai/dsh web
-bunx @deepseek-ai/dsh web          # 用系统 Node 执行 bin
-bunx --bun @deepseek-ai/dsh web    # 用 bun 运行时执行 bin
+npx @lanshi17/dsh web
+bunx @lanshi17/dsh web          # 用系统 Node 执行 bin
+bunx --bun @lanshi17/dsh web    # 用 bun 运行时执行 bin
 ```
 
 打包后的 CLI 可在 Node（`^22.19 || >=24`）与 bun 下运行。bun 下的差异：code-runtime 能力通过 amaro 剥离类型，且只执行墙钟上限（bun 不提供事件循环占用率）；profile 配置热重载在仅监听模式下仍可用（参见 [`dsh-code-runtime-worker-thread`](../../packages/code-runtime/code-runtime-worker-thread/README.md) 与 [`vendor/README.md`](../../vendor/README.md) 中的 vendored loader 说明）。

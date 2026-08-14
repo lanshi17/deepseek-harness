@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-host-plugin-inventory
+# @lanshi17/dsh-host-plugin-inventory
 
 [English](README.md) | 中文
 

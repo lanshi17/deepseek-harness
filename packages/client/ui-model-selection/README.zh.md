@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-client-ui-model-selection
+# @lanshi17/dsh-client-ui-model-selection
 
 [English](README.md) | 中文
 

@@ -1,12 +1,12 @@
-import type { Context } from '@deepseek-ai/cordis'
+import type { Context } from '@lanshi17/cordis'
 import type {
   ContextMessageNode, ConversationNodeDefinition, ConversationPreviousContext,
   SteeringMessageNode, UserMessageNode,
-} from '@deepseek-ai/dsh-client-runtime/client'
+} from '@lanshi17/dsh-client-runtime/client'
 import {
   contextForm, contextProvenance,
-} from '@deepseek-ai/dsh-client-runtime/client'
-import type {} from '@deepseek-ai/dsh-agent/types'
+} from '@lanshi17/dsh-client-runtime/client'
+import type {} from '@lanshi17/dsh-agent/types'
 import { trajectoryNode } from './trajectory-definition-common.ts'
 
 /* jscpd:ignore-start -- Target-owned Definitions intentionally keep their event

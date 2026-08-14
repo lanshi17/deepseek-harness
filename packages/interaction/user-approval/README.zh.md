@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-user-approval
+# @lanshi17/dsh-user-approval
 
 [English](README.md) | 中文
 

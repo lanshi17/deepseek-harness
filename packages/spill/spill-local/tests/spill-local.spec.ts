@@ -7,14 +7,14 @@
  */
 
 import { describe, expect, it, beforeEach, afterEach } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
+import { Context } from '@lanshi17/cordis'
 import { mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, isAbsolute, join, normalize } from 'node:path'
-import { CallId } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import type { SaveTextSpill } from '@deepseek-ai/dsh-spill'
-import LocalSpillStore, { encodeSegment, privateRoot, saveTextFile, sessionDir } from '@deepseek-ai/dsh-spill-local'
+import { CallId } from '@lanshi17/dsh-llm'
+import { SessionId } from '@lanshi17/dsh-session'
+import type { SaveTextSpill } from '@lanshi17/dsh-spill'
+import LocalSpillStore, { encodeSegment, privateRoot, saveTextFile, sessionDir } from '@lanshi17/dsh-spill-local'
 
 let root: string
 

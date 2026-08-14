@@ -1,21 +1,21 @@
 /**
  * Basic replay-aware compaction backend.
  *
- * @module @deepseek-ai/dsh-compaction-basic
+ * @module @lanshi17/dsh-compaction-basic
  */
 
-import { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import { CompactionEngine, ManualCompactionError } from '@deepseek-ai/dsh-compaction'
-import type { CompactionResult, CompactionTrigger } from '@deepseek-ai/dsh-compaction'
-import type { TokenMeter } from '@deepseek-ai/dsh-token-meter'
-import type { Session } from '@deepseek-ai/dsh-session'
-import { CONTEXT_WINDOW_EXCEEDED_CODE, assertNever } from '@deepseek-ai/dsh-llm'
-import type { LlmCallConfig } from '@deepseek-ai/dsh-llm'
-import type { Agent, PreStepDecision } from '@deepseek-ai/dsh-agent'
-import type { CommandId } from '@deepseek-ai/dsh-commands/brand'
+import { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import { CompactionEngine, ManualCompactionError } from '@lanshi17/dsh-compaction'
+import type { CompactionResult, CompactionTrigger } from '@lanshi17/dsh-compaction'
+import type { TokenMeter } from '@lanshi17/dsh-token-meter'
+import type { Session } from '@lanshi17/dsh-session'
+import { CONTEXT_WINDOW_EXCEEDED_CODE, assertNever } from '@lanshi17/dsh-llm'
+import type { LlmCallConfig } from '@lanshi17/dsh-llm'
+import type { Agent, PreStepDecision } from '@lanshi17/dsh-agent'
+import type { CommandId } from '@lanshi17/dsh-commands/brand'
 // Type-only: makes the optional sibling service available to `ctx.get()`.
-import type {} from '@deepseek-ai/dsh-compaction-tool-result-pruner'
+import type {} from '@lanshi17/dsh-compaction-tool-result-pruner'
 import {
   resolveCompactSpec,
   resolveConfig,

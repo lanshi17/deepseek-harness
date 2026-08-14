@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-client-ui-theme
+# @lanshi17/dsh-client-ui-theme
 
 [English](README.md) | 中文
 

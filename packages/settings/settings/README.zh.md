@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-settings
+# @lanshi17/dsh-settings
 
 [English](README.md) | 中文
 

@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-code-runtime-worker-thread",
+  "name": "@lanshi17/dsh-code-runtime-worker-thread",
   "description": "Worker-thread implementation of the DeepSeek Harness code-execution seam",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -36,21 +36,21 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-code-runtime": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-timeout": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-code-runtime": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-timeout": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "workspace:^",
+    "@lanshi17/schemastery": "workspace:^",
     "amaro": "^1.1.11"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-code-runtime": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-timeout": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-code-runtime": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-timeout": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

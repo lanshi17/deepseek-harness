@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-jobs
+# @lanshi17/dsh-jobs
 
 [English](README.md) | 中文
 

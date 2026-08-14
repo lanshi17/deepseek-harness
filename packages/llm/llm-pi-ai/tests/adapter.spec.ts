@@ -1,16 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import { AttachmentId, AttachmentStore } from '@deepseek-ai/dsh-attachment'
+import { Context } from '@lanshi17/cordis'
+import { AttachmentId, AttachmentStore } from '@lanshi17/dsh-attachment'
 import type {
   ImageAttachmentLimits,
   ImageAttachmentRef,
   SaveImageAttachment,
   StoredImageAttachment,
-} from '@deepseek-ai/dsh-attachment'
-import LlmRuntime, { createUserMessage, CONTEXT_WINDOW_EXCEEDED_CODE, LlmError, ReasoningEffortId, userAgent } from '@deepseek-ai/dsh-llm'
-import * as LlmPiAi from '@deepseek-ai/dsh-llm-pi-ai'
-import { PiAiAdapter } from '@deepseek-ai/dsh-llm-pi-ai'
-import { MAX_TIMER_DELAY_MS } from '@deepseek-ai/dsh-timeout'
+} from '@lanshi17/dsh-attachment'
+import LlmRuntime, { createUserMessage, CONTEXT_WINDOW_EXCEEDED_CODE, LlmError, ReasoningEffortId, userAgent } from '@lanshi17/dsh-llm'
+import * as LlmPiAi from '@lanshi17/dsh-llm-pi-ai'
+import { PiAiAdapter } from '@lanshi17/dsh-llm-pi-ai'
+import { MAX_TIMER_DELAY_MS } from '@lanshi17/dsh-timeout'
 import { getBuiltinModels } from '@earendil-works/pi-ai/providers/all'
 import { resolveProfiles } from '../src/config.ts'
 import { assemble } from './assemble.ts'

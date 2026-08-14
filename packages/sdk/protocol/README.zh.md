@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-sdk-protocol
+# @lanshi17/dsh-sdk-protocol
 
 [English](README.md) | 中文
 

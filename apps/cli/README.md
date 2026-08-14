@@ -1,4 +1,4 @@
-# `@deepseek-ai/dsh`
+# `@lanshi17/dsh`
 
 English | [中文](README.zh.md)
 
@@ -36,7 +36,7 @@ The tree composes over an empty root:
 - then the profile's `cordis.patch.yml`, then the home-level `$DSH_HOME/cordis.patch.yml`
 - then `--patch` overlays
 
-Bundles named in `dsh.profile.bundles` resolve from the dsh installation first (`@deepseek-ai/dsh-base`, `@deepseek-ai/dsh-web-app`, `@deepseek-ai/dsh-headless`), then from the profile's own `node_modules`, where pnpm installs out-of-tree plugins.
+Bundles named in `dsh.profile.bundles` resolve from the dsh installation first (`@lanshi17/dsh-base`, `@lanshi17/dsh-web-app`, `@lanshi17/dsh-headless`), then from the profile's own `node_modules`, where pnpm installs out-of-tree plugins.
 
 Use `--dump-default-config` and `--dump-config` to inspect the composed tree without booting it.
 
@@ -45,16 +45,16 @@ The [CLI behavior reference](reference/README.md) owns exact layer precedence, f
 ## Install and run
 
 ```sh
-npm i -g @deepseek-ai/dsh        # or: bun add -g @deepseek-ai/dsh
+npm i -g @lanshi17/dsh        # or: bun add -g @lanshi17/dsh
 dsh web                           # serve the browser UI; the web profile auto-initializes on first use
 ```
 
 Without a global install, a package runner executes the same bin:
 
 ```sh
-npx @deepseek-ai/dsh web
-bunx @deepseek-ai/dsh web          # runs the bin with the system Node
-bunx --bun @deepseek-ai/dsh web    # runs the bin with the bun runtime
+npx @lanshi17/dsh web
+bunx @lanshi17/dsh web          # runs the bin with the system Node
+bunx --bun @lanshi17/dsh web    # runs the bin with the bun runtime
 ```
 
 The bundled CLI runs under Node (`^22.19 || >=24`) and under bun. Bun differences: the code-runtime capability strips types through amaro and enforces only its wall-clock ceiling (bun exposes no event-loop utilization), and profile configuration hot-reload stays available in watch-only mode (see [`dsh-code-runtime-worker-thread`](../../packages/code-runtime/code-runtime-worker-thread/README.md) and the vendored-loader note in [`vendor/README.md`](../../vendor/README.md)).

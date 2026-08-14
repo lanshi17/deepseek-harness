@@ -1,12 +1,12 @@
 /**
  * Package-owned invariant companion for the browse directory-picker backend.
- * @module @deepseek-ai/dsh-host-directory-picker-browse/invariant
+ * @module @lanshi17/dsh-host-directory-picker-browse/invariant
  */
 
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-host-directory-picker-browse'
+const PACKAGE_NAME = '@lanshi17/dsh-host-directory-picker-browse'
 
 /** Cordis companion plugin name. */
 export const name = 'host-directory-picker-browse-invariant'

@@ -6,16 +6,16 @@
  * classification, the model-friendly terminal environment, and the model-facing
  * stdout/stderr merge for background reads. Execution policy belongs in
  * `tools/pre-execute` or a sandboxing executor.
- * @module @deepseek-ai/dsh-bash-local
+ * @module @lanshi17/dsh-bash-local
  */
 
-import { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import { SHELL_SETTINGS_NAMESPACE, ShellExecutor } from '@deepseek-ai/dsh-shell'
-import type { ShellExecRequest, ShellExecSpec, ShellProcess, ShellProcessRead, ShellRunResult, CollectedOutput } from '@deepseek-ai/dsh-shell'
-import type { SubprocessCollect, SubprocessHandle, SubprocessOutputReader, SubprocessSpawnSpec } from '@deepseek-ai/dsh-subprocess'
-import { installSettingsSection } from '@deepseek-ai/dsh-settings'
-import { clampTimeout, deadline, MAX_TIMER_DELAY_MS, timeoutOf } from '@deepseek-ai/dsh-timeout'
+import { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import { SHELL_SETTINGS_NAMESPACE, ShellExecutor } from '@lanshi17/dsh-shell'
+import type { ShellExecRequest, ShellExecSpec, ShellProcess, ShellProcessRead, ShellRunResult, CollectedOutput } from '@lanshi17/dsh-shell'
+import type { SubprocessCollect, SubprocessHandle, SubprocessOutputReader, SubprocessSpawnSpec } from '@lanshi17/dsh-subprocess'
+import { installSettingsSection } from '@lanshi17/dsh-settings'
+import { clampTimeout, deadline, MAX_TIMER_DELAY_MS, timeoutOf } from '@lanshi17/dsh-timeout'
 
 /**
  * Model-friendly environment overrides: disable colors, pagers, and

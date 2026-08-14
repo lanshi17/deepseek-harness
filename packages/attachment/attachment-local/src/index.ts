@@ -1,11 +1,11 @@
-/** Local durable attachment backend rooted below `DSH_HOME`. @module @deepseek-ai/dsh-attachment-local */
+/** Local durable attachment backend rooted below `DSH_HOME`. @module @lanshi17/dsh-attachment-local */
 
 import { join, resolve } from 'node:path'
-import { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import { AttachmentStore } from '@deepseek-ai/dsh-attachment'
-import type { ImageAttachmentLimits, ImageAttachmentRef, SaveImageAttachment, StoredImageAttachment } from '@deepseek-ai/dsh-attachment'
-import { resolveDshHome } from '@deepseek-ai/dsh-home-paths'
+import { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import { AttachmentStore } from '@lanshi17/dsh-attachment'
+import type { ImageAttachmentLimits, ImageAttachmentRef, SaveImageAttachment, StoredImageAttachment } from '@lanshi17/dsh-attachment'
+import { resolveDshHome } from '@lanshi17/dsh-home-paths'
 import { readImageFile, saveImageFile, validateImageFile } from './store.ts'
 
 export { detectImage } from './image.ts'

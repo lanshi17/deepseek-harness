@@ -1,20 +1,20 @@
 /**
  * Tool operation orchestration over session-query service capabilities.
  *
- * @module @deepseek-ai/dsh-tool-session-query/operations
+ * @module @lanshi17/dsh-tool-session-query/operations
  */
 
-import type { Context } from '@deepseek-ai/cordis'
-import { HarnessError } from '@deepseek-ai/dsh-llm'
-import type { SessionId } from '@deepseek-ai/dsh-session'
+import type { Context } from '@lanshi17/cordis'
+import { HarnessError } from '@lanshi17/dsh-llm'
+import type { SessionId } from '@lanshi17/dsh-session'
 import {
   SessionQueryError,
   type SessionEventSearchPage,
   type SessionEventSurface,
   type SessionRecord,
   type SessionSearchCursor,
-} from '@deepseek-ai/dsh-session-query'
-import type { ToolRunContext } from '@deepseek-ai/dsh-tools'
+} from '@lanshi17/dsh-session-query'
+import type { ToolRunContext } from '@lanshi17/dsh-tools'
 import { toolInput } from './input.ts'
 import { presentation } from './presentation.ts'
 import { serviceBoundary } from './service-boundary.ts'

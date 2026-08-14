@@ -3,12 +3,12 @@
  * The tool pauses until a UI provider returns a human answer, then feeds that
  * answer back into the agent loop as an ordinary tool result.
  *
- * @module @deepseek-ai/dsh-tool-ask-user
+ * @module @lanshi17/dsh-tool-ask-user
  */
 
-import type { Context } from '@deepseek-ai/cordis'
-import { defineTool } from '@deepseek-ai/dsh-tools'
-import '@deepseek-ai/dsh-user-questions'
+import type { Context } from '@lanshi17/cordis'
+import { defineTool } from '@lanshi17/dsh-tools'
+import '@lanshi17/dsh-user-questions'
 
 export const name = 'tool-ask-user'
 export const inject = ['tools', 'userQuestions']

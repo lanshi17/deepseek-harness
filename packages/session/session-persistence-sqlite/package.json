@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-session-persistence-sqlite",
+  "name": "@lanshi17/dsh-session-persistence-sqlite",
   "description": "SQLite durable session persistence backend for the DeepSeek Harness",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -32,18 +32,18 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-session-persistence": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-session-persistence": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "workspace:^"
+    "@lanshi17/schemastery": "workspace:^"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-session-persistence": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-session-persistence": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

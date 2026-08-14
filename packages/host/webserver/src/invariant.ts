@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-host-webserver`.
- * @module @deepseek-ai/dsh-host-webserver/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-host-webserver`.
+ * @module @lanshi17/dsh-host-webserver/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-host-webserver'
+const PACKAGE_NAME = '@lanshi17/dsh-host-webserver'
 
 /** Cordis companion plugin name. */
 export const name = 'host-webserver-invariant'

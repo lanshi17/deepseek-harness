@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-client-ui-jobs
+# @lanshi17/dsh-client-ui-jobs
 
 [English](README.md) | 中文
 

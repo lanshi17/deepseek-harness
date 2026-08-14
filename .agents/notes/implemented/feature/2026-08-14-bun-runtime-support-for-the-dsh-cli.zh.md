@@ -6,11 +6,11 @@ Status: implemented
 
 ## Problem
 
-`bunx @deepseek-ai/dsh web` 是已发布 CLI 在 bun 标准环境下的自然免安装启动方式，但它会失败：在 bun 下启动 web profile 会抛出 `Export named 'stripTypeScriptTypes' not found in module 'node:module'`（code-runtime 入口的静态导入）；修掉之后又出现 `Cannot find module '@deepseek-ai/dsh-client-ui-directory-picker-browse' from '…/loader/src/config/tree.ts'`（裸插件 specifier 从 loader 自身位置解析，而不是从配置目录解析）以及 `--expose-internals is required for HMR service`（仅监听的配置热重载挂载要求 Node 内部模块 loader）。另外，仓库的 TypeScript 源码把 `declare` 当作合法标识符使用；bun 的 TS 解析器会拒绝它，导致源码树在 bun 下运行（tsconfig `paths` 把 import 指向 `src/`）直接解析失败。
+`bunx @lanshi17/dsh web` 是已发布 CLI 在 bun 标准环境下的自然免安装启动方式，但它会失败：在 bun 下启动 web profile 会抛出 `Export named 'stripTypeScriptTypes' not found in module 'node:module'`（code-runtime 入口的静态导入）；修掉之后又出现 `Cannot find module '@lanshi17/dsh-client-ui-directory-picker-browse' from '…/loader/src/config/tree.ts'`（裸插件 specifier 从 loader 自身位置解析，而不是从配置目录解析）以及 `--expose-internals is required for HMR service`（仅监听的配置热重载挂载要求 Node 内部模块 loader）。另外，仓库的 TypeScript 源码把 `declare` 当作合法标识符使用；bun 的 TS 解析器会拒绝它，导致源码树在 bun 下运行（tsconfig `paths` 把 import 指向 `src/`）直接解析失败。
 
 ## Decision
 
-已发布的 dsh 系列现在可以在 bun 运行时下运行。`bunx --bun @deepseek-ai/dsh web`（bun 运行时——普通 `bunx` 默认用系统 Node 执行 bin，那条路径本来就能用）可以启动 web profile 并对外提供浏览器 UI；`--version` 与应用 `--help` 均可用；已用 bun 运行时对打包安装流程做了端到端验证（见 Testing）。
+已发布的 dsh 系列现在可以在 bun 运行时下运行。`bunx --bun @lanshi17/dsh web`（bun 运行时——普通 `bunx` 默认用系统 Node 执行 bin，那条路径本来就能用）可以启动 web profile 并对外提供浏览器 UI；`--version` 与应用 `--help` 均可用；已用 bun 运行时对打包安装流程做了端到端验证（见 Testing）。
 
 **没有内部 loader 时的裸插件解析。** Node 的内部 `ModuleLoader` 会把裸 import 限定在 `ctx.baseUrl`（配置／profile 目录，以及修复后的 `profiles/node_modules` 回退）；bun 的 `node:module` polyfill 不导出内部 loader，因此 loader 的回退分支现在先用 `createRequire(baseUrl).resolve(name)` 从 `ctx.baseUrl` 解析裸名称，再导入解析出的文件 URL（[vendored `tree.ts` 修改](../../../../vendor/README.md)，修改 #19）。`node:module`／`node:url` 的导入是惰性的（在回退分支内 `await import()`），因为该入口同时是浏览器 client 入口：顶层 node 内建导入会破坏 web 应用的 vite 构建（它会把 loader 浏览器化，`node:module` 在 `apps/web/vite.config.ts` 中被别名到抛错 stub）；浏览器永远不会执行裸名称分支。app-boot 的封闭运行时覆盖（`HostResolvedRootInclude`，当嵌入方传入 `bareModuleBaseUrl` 时使用）也以同样方式从该宿主基址解析裸名称，而不再委托给 loader 位置的回退。
 
@@ -34,7 +34,7 @@ Status: implemented
 
 ## Consequences
 
-- `bunx --bun @deepseek-ai/dsh web` 与 `bunx dsh web`（bun 全局安装；bunx 本身默认使用系统 Node，那条路径同样可用）在 bun 运行时下运行；Node 行为不变（内置剥离器、真实 computeMs 轮询、pipe 捕获兜底都走原路径）。
+- `bunx --bun @lanshi17/dsh web` 与 `bunx dsh web`（bun 全局安装；bunx 本身默认使用系统 Node，那条路径同样可用）在 bun 运行时下运行；Node 行为不变（内置剥离器、真实 computeMs 轮询、pipe 捕获兜底都走原路径）。
 - 两个 vendored 包新增了已记录的本地修改（loader #19、hmr #20）；同步流程必须重新应用它们。
 - `dsh-code-runtime-worker-thread` 新增 `amaro` 依赖（WASM 剥离器，只在没有内置函数的运行时加载）。
 - bun 下：`computeMs` 不生效（由墙钟上限兜底），绕过补丁 stream 槽的原生级 worker 写入不会进入运行日志。

@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-anonymous-user-id
+# @lanshi17/dsh-anonymous-user-id
 
 English | [中文](README.zh.md)
 

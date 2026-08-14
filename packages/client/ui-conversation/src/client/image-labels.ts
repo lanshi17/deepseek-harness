@@ -1,12 +1,12 @@
 /** Bridges the `conversation` locale namespace to the zero-cordis attachment
- * atoms' label props (`@deepseek-ai/dsh-client-ui-attachment` reads no
+ * atoms' label props (`@lanshi17/dsh-client-ui-attachment` reads no
  * application state; owners resolve every string). */
 
 import type {
   AttachmentRailLabels, DropOverlayLabels, ImageLightboxLabels, MessageImageLabels,
-} from '@deepseek-ai/dsh-client-ui-attachment'
-import type { ImageAttachmentLimits } from '@deepseek-ai/dsh-attachment'
-import type { Translate } from '@deepseek-ai/dsh-client-ui-slots'
+} from '@lanshi17/dsh-client-ui-attachment'
+import type { ImageAttachmentLimits } from '@lanshi17/dsh-attachment'
+import type { Translate } from '@lanshi17/dsh-client-ui-slots'
 import type { ConversationKey } from './locales.ts'
 
 /**

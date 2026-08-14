@@ -3,15 +3,15 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import Include from '@deepseek-ai/cordis-plugin-include'
-import AgentRegistry, { Inbox } from '@deepseek-ai/dsh-agent'
-import type { Agent, AgentStatus } from '@deepseek-ai/dsh-agent'
-import CommandRuntime from '@deepseek-ai/dsh-commands'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import * as CommandFeedback from '@deepseek-ai/dsh-command-feedback'
-import { getOrCreateAnonymousUserId } from '@deepseek-ai/dsh-anonymous-user-id'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import Include from '@lanshi17/cordis-plugin-include'
+import AgentRegistry, { Inbox } from '@lanshi17/dsh-agent'
+import type { Agent, AgentStatus } from '@lanshi17/dsh-agent'
+import CommandRuntime from '@lanshi17/dsh-commands'
+import SessionStore, { SessionId } from '@lanshi17/dsh-session'
+import * as CommandFeedback from '@lanshi17/dsh-command-feedback'
+import { getOrCreateAnonymousUserId } from '@lanshi17/dsh-anonymous-user-id'
 
 let root: string | undefined
 let context: Context | undefined
@@ -56,10 +56,10 @@ describe('/feedback real Loader composition through cordis.yml', () => {
     vi.stubEnv('DSH_HOME', root)
     const configPath = join(root, 'cordis.yml')
     await writeFile(configPath, [
-      "- name: '@deepseek-ai/dsh-agent'",
-      "- name: '@deepseek-ai/dsh-session'",
-      "- name: '@deepseek-ai/dsh-commands'",
-      "- name: '@deepseek-ai/dsh-command-feedback'",
+      "- name: '@lanshi17/dsh-agent'",
+      "- name: '@lanshi17/dsh-session'",
+      "- name: '@lanshi17/dsh-commands'",
+      "- name: '@lanshi17/dsh-command-feedback'",
       '',
     ].join('\n'))
 
@@ -68,10 +68,10 @@ describe('/feedback real Loader composition through cordis.yml', () => {
     await context.plugin(Loader)
     context.loader.builtins.include = Include
     const modules = new Map<string, unknown>([
-      ['@deepseek-ai/dsh-agent', AgentRegistry],
-      ['@deepseek-ai/dsh-session', SessionStore],
-      ['@deepseek-ai/dsh-commands', CommandRuntime],
-      ['@deepseek-ai/dsh-command-feedback', CommandFeedback],
+      ['@lanshi17/dsh-agent', AgentRegistry],
+      ['@lanshi17/dsh-session', SessionStore],
+      ['@lanshi17/dsh-commands', CommandRuntime],
+      ['@lanshi17/dsh-command-feedback', CommandFeedback],
     ])
     context.loader.internal = {
       version: 'v2',

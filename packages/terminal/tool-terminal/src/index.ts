@@ -1,21 +1,21 @@
 /**
  * Six model-facing persistent terminal tools. Owner identity comes from the exact
  * tool execution Agent; generic `ctx.jobs` owns background ids and collection.
- * @module @deepseek-ai/dsh-tool-terminal
+ * @module @lanshi17/dsh-tool-terminal
  */
 
-import { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import { TerminalSessionId } from '@deepseek-ai/dsh-terminal'
-import type { TerminalSendResult, TerminalSessionId as TerminalSessionIdType, TerminalSignal } from '@deepseek-ai/dsh-terminal'
-import type {} from '@deepseek-ai/dsh-jobs'
-import { defineTool } from '@deepseek-ai/dsh-tools'
-import type { ToolDefinition } from '@deepseek-ai/dsh-tools'
+import { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import type { Agent } from '@lanshi17/dsh-agent'
+import type { ContentBlock } from '@lanshi17/dsh-llm'
+import { TerminalSessionId } from '@lanshi17/dsh-terminal'
+import type { TerminalSendResult, TerminalSessionId as TerminalSessionIdType, TerminalSignal } from '@lanshi17/dsh-terminal'
+import type {} from '@lanshi17/dsh-jobs'
+import { defineTool } from '@lanshi17/dsh-tools'
+import type { ToolDefinition } from '@lanshi17/dsh-tools'
 import { boundTerminalText, renderList, renderRead, renderSend, renderSendRead, renderSpawn } from './render.ts'
 
-declare module '@deepseek-ai/dsh-jobs' {
+declare module '@lanshi17/dsh-jobs' {
   interface JobKindMap {
     'pty-send': 'pty-send'
   }
@@ -250,7 +250,7 @@ export function apply(ctx: Context, config: Config = {}): void {
       if (args.run_in_background === true) {
         if (!enableRunInBackground) throw new Error('background terminal sends are disabled by tool-terminal configuration')
         const jobs = ctx.get('jobs')
-        if (jobs === undefined) throw new Error('background terminal sends require @deepseek-ai/dsh-jobs and @deepseek-ai/dsh-tool-jobs')
+        if (jobs === undefined) throw new Error('background terminal sends require @lanshi17/dsh-jobs and @lanshi17/dsh-tool-jobs')
         let cancelRequested = false
         const jobId = jobs.start({
           kind: 'pty-send',

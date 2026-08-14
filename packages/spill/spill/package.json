@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-spill",
+  "name": "@lanshi17/dsh-spill",
   "description": "Abstract spill storage seam (ctx.spillStore) for the DeepSeek Harness — save oversized tool text and return a retrieval locator",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -32,17 +32,17 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-brand": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-brand": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

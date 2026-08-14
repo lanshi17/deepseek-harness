@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-subagent-acp",
+  "name": "@lanshi17/dsh-subagent-acp",
   "description": "Out-of-process ACP subagent backend: drives a child agent in a spawned subprocess over the Agent Client Protocol",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -32,30 +32,30 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-subagent": "workspace:^",
-    "@deepseek-ai/dsh-subprocess": "workspace:^",
-    "@deepseek-ai/dsh-timeout": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-agent": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-subagent": "workspace:^",
+    "@lanshi17/dsh-subprocess": "workspace:^",
+    "@lanshi17/dsh-timeout": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "0.25.1",
-    "@deepseek-ai/schemastery": "workspace:^"
+    "@lanshi17/schemastery": "workspace:^"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis-plugin-loader": "workspace:^",
-    "@deepseek-ai/dsh-agent": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-loader-smoke": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-subagent": "workspace:^",
-    "@deepseek-ai/dsh-subprocess": "workspace:^",
-    "@deepseek-ai/dsh-subprocess-local": "workspace:^",
-    "@deepseek-ai/dsh-timeout": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/cordis-plugin-loader": "workspace:^",
+    "@lanshi17/dsh-agent": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-loader-smoke": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-subagent": "workspace:^",
+    "@lanshi17/dsh-subprocess": "workspace:^",
+    "@lanshi17/dsh-subprocess-local": "workspace:^",
+    "@lanshi17/dsh-timeout": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

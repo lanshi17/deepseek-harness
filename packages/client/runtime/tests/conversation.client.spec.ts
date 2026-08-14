@@ -1,8 +1,8 @@
 /** Assistant block classifier (moved here with sessions/conversation.ts). */
 
 import { describe, expect, it } from 'vitest'
-import { AttachmentId } from '@deepseek-ai/dsh-attachment'
-import type { ContentBlock } from '@deepseek-ai/dsh-api-remotes/client'
+import { AttachmentId } from '@lanshi17/dsh-attachment'
+import type { ContentBlock } from '@lanshi17/dsh-api-remotes/client'
 import { toAssistantBlock, toAssistantBlocks } from '../src/client/sessions/conversation.ts'
 
 describe('toAssistantBlock', () => {

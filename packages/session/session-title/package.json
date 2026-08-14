@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-session-title",
+  "name": "@lanshi17/dsh-session-title",
   "description": "Log-backed session title service and provider registry for the DeepSeek Harness",
   "version": "0.1.0-rc.7",
   "publishConfig": {
@@ -41,25 +41,25 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-session-projection": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-brand": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-session-projection": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "workspace:^",
+    "@lanshi17/schemastery": "workspace:^",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:^",
-    "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@deepseek-ai/dsh-llm": "workspace:^",
-    "@deepseek-ai/dsh-session": "workspace:^",
-    "@deepseek-ai/dsh-session-persistence-jsonl": "workspace:^",
-    "@deepseek-ai/dsh-session-persistence-sqlite": "workspace:^",
-    "@deepseek-ai/dsh-session-projection": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^"
+    "@lanshi17/dsh-brand": "workspace:^",
+    "@lanshi17/dsh-invariants": "workspace:^",
+    "@lanshi17/dsh-llm": "workspace:^",
+    "@lanshi17/dsh-session": "workspace:^",
+    "@lanshi17/dsh-session-persistence-jsonl": "workspace:^",
+    "@lanshi17/dsh-session-persistence-sqlite": "workspace:^",
+    "@lanshi17/dsh-session-projection": "workspace:^",
+    "@lanshi17/cordis": "workspace:^"
   }
 }

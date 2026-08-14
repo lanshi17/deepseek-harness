@@ -1,37 +1,37 @@
 import { describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import InvariantRegistry from '@deepseek-ai/dsh-invariants'
-import { CommandId } from '@deepseek-ai/dsh-commands/brand'
-import * as SessionInvariant from '@deepseek-ai/dsh-session/invariant'
-import * as AgentInvariant from '@deepseek-ai/dsh-agent/invariant'
-import * as AgentLoopInvariant from '@deepseek-ai/dsh-agent-loop/invariant'
-import * as CompactionInvariant from '@deepseek-ai/dsh-compaction/invariant'
-import * as CompactionBasicInvariant from '@deepseek-ai/dsh-compaction-basic/invariant'
-import { BasicCompactionEngine } from '@deepseek-ai/dsh-compaction-basic'
-import { CompactionId, isCompactCheckpointSource, ManualCompactionError } from '@deepseek-ai/dsh-compaction'
-import type { CompactionResult } from '@deepseek-ai/dsh-compaction'
+import { Context } from '@lanshi17/cordis'
+import AgentLoop from '@lanshi17/dsh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@lanshi17/dsh-agent-loop-testkit'
+import InvariantRegistry from '@lanshi17/dsh-invariants'
+import { CommandId } from '@lanshi17/dsh-commands/brand'
+import * as SessionInvariant from '@lanshi17/dsh-session/invariant'
+import * as AgentInvariant from '@lanshi17/dsh-agent/invariant'
+import * as AgentLoopInvariant from '@lanshi17/dsh-agent-loop/invariant'
+import * as CompactionInvariant from '@lanshi17/dsh-compaction/invariant'
+import * as CompactionBasicInvariant from '@lanshi17/dsh-compaction-basic/invariant'
+import { BasicCompactionEngine } from '@lanshi17/dsh-compaction-basic'
+import { CompactionId, isCompactCheckpointSource, ManualCompactionError } from '@lanshi17/dsh-compaction'
+import type { CompactionResult } from '@lanshi17/dsh-compaction'
 import {
   createAssistantMessage,
   createUserMessage,
   LlmAdapter,
-} from '@deepseek-ai/dsh-llm'
+} from '@lanshi17/dsh-llm'
 import type {
   ContentBlock,
   LlmResolvedModelInfo,
   Message,
   StreamChunk,
   TokenUsage,
-} from '@deepseek-ai/dsh-llm'
-import SessionStore, { Session, SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import TokenMeter from '@deepseek-ai/dsh-token-meter'
-import type { Agent } from '@deepseek-ai/dsh-agent'
+} from '@lanshi17/dsh-llm'
+import SessionStore, { Session, SessionId, type SessionEvent } from '@lanshi17/dsh-session'
+import LlmRuntime from '@lanshi17/dsh-llm'
+import TokenMeter from '@lanshi17/dsh-token-meter'
+import type { Agent } from '@lanshi17/dsh-agent'
 import type {
   SummarizationInput,
   SummaryResult,
-} from '@deepseek-ai/dsh-compaction-basic/src/summarizer.ts'
+} from '@lanshi17/dsh-compaction-basic/src/summarizer.ts'
 
 const MODEL = 'mock'
 const SIGNAL = new AbortController().signal

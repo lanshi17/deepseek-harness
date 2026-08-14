@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-invariants`.
- * @module @deepseek-ai/dsh-invariants/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-invariants`.
+ * @module @lanshi17/dsh-invariants/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
+import type { Context } from '@lanshi17/cordis'
 import type { InvariantInstaller } from './index.ts'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-invariants'
+const PACKAGE_NAME = '@lanshi17/dsh-invariants'
 
 /** Cordis companion plugin name. */
 export const name = 'invariants-invariant'

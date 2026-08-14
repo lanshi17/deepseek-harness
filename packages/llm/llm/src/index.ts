@@ -3,10 +3,10 @@
  * API. Exports the `LlmRuntime` default, the abstract `LlmAdapter` for
  * provider backends, and `BlockAssembler` for chunk assembly.
  *
- * @module @deepseek-ai/dsh-llm
+ * @module @lanshi17/dsh-llm
  */
 
-import { Context, Service } from '@deepseek-ai/cordis'
+import { Context, Service } from '@lanshi17/cordis'
 import type {
   GenerateOptions,
   LlmConfigurableProvider,
@@ -43,7 +43,7 @@ export { BlockAssembler } from './assembler.ts'
 export { callConfigEquals, deepFreeze, isAgentLoopRequest, markAgentLoopRequest } from './call-config.ts'
 export type { LlmCallConfig, LlmCallConfigAdapterDefaults } from './call-config.ts'
 
-declare module '@deepseek-ai/cordis' {
+declare module '@lanshi17/cordis' {
   interface Context {
     llm: LlmRuntime
   }

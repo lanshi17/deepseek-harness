@@ -2,15 +2,15 @@ import { describe, expect, it, vi } from 'vitest'
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { join, sep } from 'node:path'
 import { tmpdir } from 'node:os'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import { renderPrompt, TOOL_ORDER_REST } from '@deepseek-ai/dsh-system-prompt'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import { renderPrompt, TOOL_ORDER_REST } from '@lanshi17/dsh-system-prompt'
 import * as agentCore from '../src/index.ts'
-import { agentEvents, type Agent } from '@deepseek-ai/dsh-agent'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import LocalBashExecutor from '@deepseek-ai/dsh-bash-local'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import * as ToolFs from '@deepseek-ai/dsh-tool-fs'
+import { agentEvents, type Agent } from '@lanshi17/dsh-agent'
+import { SessionId } from '@lanshi17/dsh-session'
+import LocalBashExecutor from '@lanshi17/dsh-bash-local'
+import LocalFileSystem from '@lanshi17/dsh-fs-local'
+import * as ToolFs from '@lanshi17/dsh-tool-fs'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import {
   createUserMessage,
@@ -22,16 +22,16 @@ import {
   type Message,
   type ResolvedRetryPolicy,
   type StreamChunk,
-} from '@deepseek-ai/dsh-llm'
-import type { ToolExecution } from '@deepseek-ai/dsh-tools'
-import * as sessionInvariant from '@deepseek-ai/dsh-session/invariant'
-import * as agentInvariant from '@deepseek-ai/dsh-agent/invariant'
-import * as scopeInvariant from '@deepseek-ai/dsh-scope/invariant'
-import * as agentLoopInvariant from '@deepseek-ai/dsh-agent-loop/invariant'
+} from '@lanshi17/dsh-llm'
+import type { ToolExecution } from '@lanshi17/dsh-tools'
+import * as sessionInvariant from '@lanshi17/dsh-session/invariant'
+import * as agentInvariant from '@lanshi17/dsh-agent/invariant'
+import * as scopeInvariant from '@lanshi17/dsh-scope/invariant'
+import * as agentLoopInvariant from '@lanshi17/dsh-agent-loop/invariant'
 
 const testToolSignal = new AbortController().signal
 
-declare module '@deepseek-ai/dsh-jobs' {
+declare module '@lanshi17/dsh-jobs' {
   interface JobKindMap {
     probe: 'probe'
   }
@@ -53,7 +53,7 @@ async function composePrefix(ctx: Context, cwd: string): Promise<Message[]> {
 }
 
 /**
- * Unit coverage for the @deepseek-ai/dsh-agent-spine-demo bundle: mounting it brings
+ * Unit coverage for the @lanshi17/dsh-agent-spine-demo bundle: mounting it brings
  * up the whole default spine in one `ctx.plugin`, and the forwarded
  * `agents` config reaches the loop (default `[]`, or a pre-created agent).
  *
@@ -227,8 +227,8 @@ describe('dsh-agent-spine-demo bundle', () => {
 
     for (const invariants of [
       { enabled: false },
-      { package_allowlist: ['^@deepseek-ai/dsh-agent$'] },
-      { package_blocklist: ['^@deepseek-ai/dsh-session$'] },
+      { package_allowlist: ['^@lanshi17/dsh-agent$'] },
+      { package_blocklist: ['^@lanshi17/dsh-session$'] },
     ]) {
       const filtered = await mount({ workspaceContext: false, invariants })
       expect(() => { nestedTurn(filtered) }).not.toThrow()

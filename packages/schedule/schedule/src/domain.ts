@@ -1,9 +1,9 @@
 /**
  * Strict Schedule decoding, replay, time validation, and framing.
- * @module @deepseek-ai/dsh-schedule
+ * @module @lanshi17/dsh-schedule
  */
 
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
+import type { SessionEvent } from '@lanshi17/dsh-session'
 import type {
   AfterScheduleRecord,
   AtInput,

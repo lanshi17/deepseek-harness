@@ -1,11 +1,11 @@
 # Add Code Mode and Cordis tools to the headless spawn/workflow stack.
 - id: base
-  name: '@deepseek-ai/cordis-plugin-include'
+  name: '@lanshi17/cordis-plugin-include'
   config:
     path: ./cordis.yml
     patches:
       - id: agent-spine
-        name: '@deepseek-ai/dsh-agent-spine-demo'
+        name: '@lanshi17/dsh-agent-spine-demo'
         config:
           agents:
             - id: main
@@ -21,14 +21,14 @@
 
             Verify your work by running the code or tests. Keep answers brief and factual.
       - id: persistence
-        name: '@deepseek-ai/dsh-session-persistence-jsonl'
+        name: '@lanshi17/dsh-session-persistence-jsonl'
         config:
           root: './.sessions'
           compression: !!js "process.env.DSH_SNAPSHOT === undefined ? 'zstd' : 'none'"
       - insert:
           - id: code-runtime
-            name: '@deepseek-ai/dsh-code-runtime-worker-thread'
+            name: '@lanshi17/dsh-code-runtime-worker-thread'
           - id: cordis-host-runner
-            name: '@deepseek-ai/dsh-cordis-host-runner'
+            name: '@lanshi17/dsh-cordis-host-runner'
           - id: tool-cordis
-            name: '@deepseek-ai/dsh-tool-cordis'
+            name: '@lanshi17/dsh-tool-cordis'

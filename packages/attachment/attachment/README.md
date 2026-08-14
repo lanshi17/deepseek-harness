@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-attachment
+# @lanshi17/dsh-attachment
 
 English | [中文](README.zh.md)
 

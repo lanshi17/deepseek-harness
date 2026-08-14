@@ -1,4 +1,4 @@
-# `@deepseek-ai/dsh-cmdline`
+# `@lanshi17/dsh-cmdline`
 
 [English](README.md) | 中文
 
@@ -32,14 +32,14 @@ export function apply(ctx: Context): void {
 
 ```yaml
 - id: web-startup
-  name: '@deepseek-ai/dsh-web-app/startup'
+  name: '@lanshi17/dsh-web-app/startup'
 ```
 
 所有由这些取值配置的行都使用普通服务注入，并在惰性配置中直接访问该服务：
 
 ```yaml
 - id: webserver
-  name: '@deepseek-ai/dsh-host-webserver'
+  name: '@lanshi17/dsh-host-webserver'
   inject: [webStartup]
   config:
     host: !!js ctx.webStartup.host ?? '127.0.0.1'

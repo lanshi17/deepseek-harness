@@ -13,16 +13,16 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import Include from '@deepseek-ai/cordis-plugin-include'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import { credentialRef } from '@deepseek-ai/dsh-credentials'
-import LocalCredentialProvider from '@deepseek-ai/dsh-credentials-local'
-import { settingsNamespace } from '@deepseek-ai/dsh-settings'
-import FileSettingsProvider from '@deepseek-ai/dsh-settings-file'
-import { getOrCreateAnonymousUserId } from '@deepseek-ai/dsh-anonymous-user-id'
-import * as LlmDeepSeek from '@deepseek-ai/dsh-llm-deepseek'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import Include from '@lanshi17/cordis-plugin-include'
+import LlmRuntime from '@lanshi17/dsh-llm'
+import { credentialRef } from '@lanshi17/dsh-credentials'
+import LocalCredentialProvider from '@lanshi17/dsh-credentials-local'
+import { settingsNamespace } from '@lanshi17/dsh-settings'
+import FileSettingsProvider from '@lanshi17/dsh-settings-file'
+import { getOrCreateAnonymousUserId } from '@lanshi17/dsh-anonymous-user-id'
+import * as LlmDeepSeek from '@lanshi17/dsh-llm-deepseek'
 import { assemble } from './assemble.ts'
 import { closeMockServers, mockServer, textEvents } from './mock-server.ts'
 
@@ -63,19 +63,19 @@ async function loadComposition(
     ...options.withDynamic
       ? [
         '- id: settings',
-        "  name: '@deepseek-ai/dsh-settings-file'",
+        "  name: '@lanshi17/dsh-settings-file'",
         '  config:',
         `    path: ${JSON.stringify(settingsPath)}`,
         '    debounceMs: 10',
         '- id: credentials',
-        "  name: '@deepseek-ai/dsh-credentials-local'",
+        "  name: '@lanshi17/dsh-credentials-local'",
         '  config:',
         `    path: ${JSON.stringify(credentialsPath)}`,
         '    debounceMs: 10',
       ]
       : [],
     '- id: llm-deepseek',
-    "  name: '@deepseek-ai/dsh-llm-deepseek'",
+    "  name: '@lanshi17/dsh-llm-deepseek'",
     '  config:',
     `    baseURL: ${JSON.stringify(options.baseURL)}`,
     '',
@@ -88,9 +88,9 @@ async function loadComposition(
   ctx.loader.builtins.include = Include
   const modules = new Map<string, unknown>([
     ['test-llm-service', LlmRuntime],
-    ['@deepseek-ai/dsh-settings-file', FileSettingsProvider],
-    ['@deepseek-ai/dsh-credentials-local', LocalCredentialProvider],
-    ['@deepseek-ai/dsh-llm-deepseek', LlmDeepSeek],
+    ['@lanshi17/dsh-settings-file', FileSettingsProvider],
+    ['@lanshi17/dsh-credentials-local', LocalCredentialProvider],
+    ['@lanshi17/dsh-llm-deepseek', LlmDeepSeek],
   ])
   ctx.loader.internal = {
     version: 'v2',

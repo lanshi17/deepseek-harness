@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-token-meter`.
- * @module @deepseek-ai/dsh-token-meter/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-token-meter`.
+ * @module @lanshi17/dsh-token-meter/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-token-meter'
+const PACKAGE_NAME = '@lanshi17/dsh-token-meter'
 
 /** Cordis companion plugin name. */
 export const name = 'token-meter-invariant'

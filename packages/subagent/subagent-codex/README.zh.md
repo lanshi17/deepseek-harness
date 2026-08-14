@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-subagent-codex
+# @lanshi17/dsh-subagent-codex
 
 [English](README.md) | 中文
 
@@ -31,13 +31,13 @@
 
 ```yaml
 - id: subagent-codex
-  name: '@deepseek-ai/dsh-subagent-codex'
+  name: '@lanshi17/dsh-subagent-codex'
   config:
     env:
       OPENAI_API_KEY: !!js process.env.OPENAI_API_KEY
 
 - id: tool-subagent-codex
-  name: '@deepseek-ai/dsh-tool-subagent'
+  name: '@lanshi17/dsh-tool-subagent'
   disabled: true
   config:
     provider: codex

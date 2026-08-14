@@ -3,13 +3,13 @@
  * Every workspace package registers checks from a `./invariant` companion;
  * ordinary package entrypoints stay independent of diagnostics.
  *
- * @module @deepseek-ai/dsh-invariants
+ * @module @lanshi17/dsh-invariants
  */
 
-import { Context, Service } from '@deepseek-ai/cordis'
-import type { Inject } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import type Schema from '@deepseek-ai/schemastery'
+import { Context, Service } from '@lanshi17/cordis'
+import type { Inject } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import type Schema from '@lanshi17/schemastery'
 
 /** Runtime invariant selection configured on the service plugin. */
 export interface Config {
@@ -65,7 +65,7 @@ export class InvariantError extends Error {
   }
 }
 
-declare module '@deepseek-ai/cordis' {
+declare module '@lanshi17/cordis' {
   interface Context {
     invariants: InvariantRegistry
   }

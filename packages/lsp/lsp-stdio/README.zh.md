@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-lsp-stdio
+# @lanshi17/dsh-lsp-stdio
 
 [English](README.md) | 中文
 

@@ -8,10 +8,10 @@
 
 import type {
   ConfigurableProviderView, CredentialView, IApiClient, SettingsNamespaceView,
-} from '@deepseek-ai/dsh-api-remotes/client'
-import type { SnapshotStore } from '@deepseek-ai/dsh-client-runtime/client'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-runtime/client'
-import { getPath, hasPath, nodeAtPath, rehydrateSchema } from '@deepseek-ai/dsh-client-schema-form'
+} from '@lanshi17/dsh-api-remotes/client'
+import type { SnapshotStore } from '@lanshi17/dsh-client-runtime/client'
+import { createSnapshotStore } from '@lanshi17/dsh-client-runtime/client'
+import { getPath, hasPath, nodeAtPath, rehydrateSchema } from '@lanshi17/dsh-client-schema-form'
 
 /**
  * Any route key walks a dict schema to the same profile node, so the lookup

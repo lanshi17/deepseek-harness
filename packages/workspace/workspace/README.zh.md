@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-workspace
+# @lanshi17/dsh-workspace
 
 [English](README.md) | 中文
 

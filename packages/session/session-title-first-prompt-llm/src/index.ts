@@ -1,12 +1,12 @@
 /** First-human-message model provider for `ctx.sessionTitle`. */
 
-import type { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
+import type { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
 import {
   registerSessionTitleLlmProvider,
   SessionTitleLlmConfigFields,
-} from '@deepseek-ai/dsh-session-title-llm'
-import type { SessionTitleLlmConfig } from '@deepseek-ai/dsh-session-title-llm'
+} from '@lanshi17/dsh-session-title-llm'
+import type { SessionTitleLlmConfig } from '@lanshi17/dsh-session-title-llm'
 
 export const name = 'session-title-first-prompt-llm'
 export const inject = ['sessionTitle', 'llm', 'sessions']

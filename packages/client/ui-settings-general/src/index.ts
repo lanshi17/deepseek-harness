@@ -1,8 +1,8 @@
 /** Host loader entry for the browser implementation exported from `./client`. */
 
-import type { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
-import { settingsNamespace } from '@deepseek-ai/dsh-settings'
+import type { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
+import { settingsNamespace } from '@lanshi17/dsh-settings'
 
 /** Durable settings namespace for product-wide GUI onboarding facts. */
 const ONBOARDING_SETTINGS_NAMESPACE = 'ui-onboarding'

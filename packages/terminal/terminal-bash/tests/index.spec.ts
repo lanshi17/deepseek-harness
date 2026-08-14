@@ -1,24 +1,24 @@
 import { describe, expect, it, vi } from 'vitest'
 import { PassThrough } from 'node:stream'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import SessionStore, { Session, SessionId } from '@deepseek-ai/dsh-session'
-import AgentRegistry, { Inbox, type Agent } from '@deepseek-ai/dsh-agent'
-import SandboxProvider from '@deepseek-ai/dsh-sandbox'
-import type { ConfinedArgv, SandboxPolicy } from '@deepseek-ai/dsh-sandbox'
-import SandboxPolicyService, { setSandboxMode } from '@deepseek-ai/dsh-sandbox-policy'
-import TerminalSessionService, { TerminalBackendCleanupError, TerminalSessionId } from '@deepseek-ai/dsh-terminal'
-import { BashTerminalBackend } from '@deepseek-ai/dsh-terminal-bash'
-import * as ptyLocal from '@deepseek-ai/dsh-terminal-bash'
-import type { ResolvedConfig } from '@deepseek-ai/dsh-terminal-bash/src/config.ts'
-import type { LocalPtySession } from '@deepseek-ai/dsh-terminal-bash/src/session.ts'
-import { SubprocessRuntime } from '@deepseek-ai/dsh-subprocess'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import SessionStore, { Session, SessionId } from '@lanshi17/dsh-session'
+import AgentRegistry, { Inbox, type Agent } from '@lanshi17/dsh-agent'
+import SandboxProvider from '@lanshi17/dsh-sandbox'
+import type { ConfinedArgv, SandboxPolicy } from '@lanshi17/dsh-sandbox'
+import SandboxPolicyService, { setSandboxMode } from '@lanshi17/dsh-sandbox-policy'
+import TerminalSessionService, { TerminalBackendCleanupError, TerminalSessionId } from '@lanshi17/dsh-terminal'
+import { BashTerminalBackend } from '@lanshi17/dsh-terminal-bash'
+import * as ptyLocal from '@lanshi17/dsh-terminal-bash'
+import type { ResolvedConfig } from '@lanshi17/dsh-terminal-bash/src/config.ts'
+import type { LocalPtySession } from '@lanshi17/dsh-terminal-bash/src/session.ts'
+import { SubprocessRuntime } from '@lanshi17/dsh-subprocess'
 import type {
   SubprocessHandle,
   SubprocessSpawnSpec,
   SubprocessTerminalHandle,
   SubprocessTerminalSpawnSpec,
-} from '@deepseek-ai/dsh-subprocess'
+} from '@lanshi17/dsh-subprocess'
 
 class EmptySandbox extends SandboxProvider {
   confine(_argv: readonly string[], _policy: SandboxPolicy): ConfinedArgv {

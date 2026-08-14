@@ -1,9 +1,9 @@
-import { Context } from '@deepseek-ai/cordis'
-import z from '@deepseek-ai/schemastery'
+import { Context } from '@lanshi17/cordis'
+import z from '@lanshi17/schemastery'
 import { describe, expect, it, vi } from 'vitest'
-import type { RpcResponse, SettingsNamespaceView } from '@deepseek-ai/dsh-api-remotes/client'
-import { TestRemote } from '@deepseek-ai/dsh-client-test-runtime'
-import type { SettingsScope } from '@deepseek-ai/dsh-client-runtime/client'
+import type { RpcResponse, SettingsNamespaceView } from '@lanshi17/dsh-api-remotes/client'
+import { TestRemote } from '@lanshi17/dsh-client-test-runtime'
+import type { SettingsScope } from '@lanshi17/dsh-client-runtime/client'
 import { SettingsScopeController, SettingsScopeBinder } from '../src/client/settings-scope.ts'
 
 interface UiTestSettings {

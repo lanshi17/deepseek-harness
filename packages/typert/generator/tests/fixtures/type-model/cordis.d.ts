@@ -1,4 +1,4 @@
-declare module '@deepseek-ai/cordis' {
+declare module '@lanshi17/cordis' {
   export class Service { protected readonly __service?: never }
 
   export interface Context {}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { resolveStripper } from '@deepseek-ai/dsh-code-runtime-worker-thread'
+import { resolveStripper } from '@lanshi17/dsh-code-runtime-worker-thread'
 
 describe('resolveStripper — type-strip implementation selection', () => {
   it('prefers the node:module builtin when exported', () => {

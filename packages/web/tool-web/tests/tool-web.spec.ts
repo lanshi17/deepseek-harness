@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
+import { Context } from '@lanshi17/cordis'
 import TurndownService from 'turndown'
-import { CallId } from '@deepseek-ai/dsh-llm'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { type ToolExecutionResult } from '@deepseek-ai/dsh-tools'
-import WebRuntime from '@deepseek-ai/dsh-web'
-import type { WebSearchProvider, WebSearchResult } from '@deepseek-ai/dsh-web'
-import * as ToolWeb from '@deepseek-ai/dsh-tool-web'
+import { CallId } from '@lanshi17/dsh-llm'
+import SystemPrompt from '@lanshi17/dsh-system-prompt'
+import ToolRuntime, { type ToolExecutionResult } from '@lanshi17/dsh-tools'
+import WebRuntime from '@lanshi17/dsh-web'
+import type { WebSearchProvider, WebSearchResult } from '@lanshi17/dsh-web'
+import * as ToolWeb from '@lanshi17/dsh-tool-web'
 import {
   formatSearchOutput,
   formatFetchOutput,
@@ -21,9 +21,9 @@ import {
   fetchMetaFromValue,
   fetchMetaFromResult,
   WEB_SEARCH_MAX_RESULTS,
-} from '@deepseek-ai/dsh-tool-web'
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import type { ToolResult } from '@deepseek-ai/dsh-tools'
+} from '@lanshi17/dsh-tool-web'
+import type { ContentBlock } from '@lanshi17/dsh-llm'
+import type { ToolResult } from '@lanshi17/dsh-tools'
 
 const testToolSignal = new AbortController().signal
 
@@ -38,7 +38,7 @@ async function mountTools(opts: {
   config?: ToolWeb.Config
   webConfig?: ConstructorParameters<typeof WebRuntime>[1]
   search?: WebSearchProvider
-  fetchProvider?: import('@deepseek-ai/dsh-web').WebFetchProvider
+  fetchProvider?: import('@lanshi17/dsh-web').WebFetchProvider
 } = {}): Promise<{ ctx: Context; fiber: Awaited<ReturnType<Context['plugin']>>; call: (name: string, args: unknown) => Promise<ToolExecutionResult> }> {
   const ctx = new Context()
   await ctx.plugin(SystemPrompt)

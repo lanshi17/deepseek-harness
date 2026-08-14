@@ -1,12 +1,12 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-credentials`.
- * @module @deepseek-ai/dsh-credentials/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-credentials`.
+ * @module @lanshi17/dsh-credentials/invariant
  */
 
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantFailure, InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantFailure, InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-credentials'
+const PACKAGE_NAME = '@lanshi17/dsh-credentials'
 
 /** Cordis companion plugin name. */
 export const name = 'credentials-invariant'

@@ -2,24 +2,24 @@ import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import Include from '@deepseek-ai/cordis-plugin-include'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import AgentRegistry, { assembleContextFor, type Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import Include from '@lanshi17/cordis-plugin-include'
+import LlmRuntime from '@lanshi17/dsh-llm'
+import SessionStore, { SessionId } from '@lanshi17/dsh-session'
+import SystemPrompt from '@lanshi17/dsh-system-prompt'
+import ToolRuntime from '@lanshi17/dsh-tools'
+import AgentRegistry, { assembleContextFor, type Agent } from '@lanshi17/dsh-agent'
+import AgentLoop from '@lanshi17/dsh-agent-loop'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import AgentPresets, {
   COMPOSITION_FILE, leakedServices, livePresetMounts, mountPreset, PresetMountError, serviceForAgent,
-} from '@deepseek-ai/dsh-agent-presets'
-import type { Config } from '@deepseek-ai/dsh-agent-presets'
-import type {} from '@deepseek-ai/dsh-agent-presets/types'
-import { bindScopeParent, createScope, scopeOf } from '@deepseek-ai/dsh-scope'
+} from '@lanshi17/dsh-agent-presets'
+import type { Config } from '@lanshi17/dsh-agent-presets'
+import type {} from '@lanshi17/dsh-agent-presets/types'
+import { bindScopeParent, createScope, scopeOf } from '@lanshi17/dsh-scope'
 
-declare module '@deepseek-ai/cordis' {
+declare module '@lanshi17/cordis' {
   interface Context {
     /** Published by the `isolated` fixture preset behind an entry-local realm. */
     fixtureIsolatedSvc: { label: string }

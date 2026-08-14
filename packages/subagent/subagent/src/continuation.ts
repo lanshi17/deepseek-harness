@@ -18,24 +18,24 @@
  * disposed by then, and the release that wakes the parent's own settlement
  * watcher has already run. See {@link SubagentContinuationManager.notifySettlement}.
  *
- * @module @deepseek-ai/dsh-subagent
+ * @module @lanshi17/dsh-subagent
  */
 
 import { randomUUID } from 'node:crypto'
-import type { Context } from '@deepseek-ai/cordis'
+import type { Context } from '@lanshi17/cordis'
 import type {
   Agent,
   AgentHandle,
   AgentOptions,
   AgentSetupCommit,
   CreateAgentOptions,
-} from '@deepseek-ai/dsh-agent'
-import { boundContextSummary, createUserMessage, errorChain } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, MessageId, MessageSource } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
-import type { SessionPersistence } from '@deepseek-ai/dsh-session-persistence'
-import type { ToolRestriction } from '@deepseek-ai/dsh-tools'
+} from '@lanshi17/dsh-agent'
+import { boundContextSummary, createUserMessage, errorChain } from '@lanshi17/dsh-llm'
+import type { ContentBlock, MessageId, MessageSource } from '@lanshi17/dsh-llm'
+import { SessionId } from '@lanshi17/dsh-session'
+import type { SessionEvent } from '@lanshi17/dsh-session'
+import type { SessionPersistence } from '@lanshi17/dsh-session-persistence'
+import type { ToolRestriction } from '@lanshi17/dsh-tools'
 import { foldSubagentDescriptor, snapshotSubagentDescriptor } from './descriptor.ts'
 import type { SubagentDescriptorData } from './descriptor.ts'
 import {
@@ -89,7 +89,7 @@ export interface SubagentSettledMessageSource {
   readonly senderSessionId: SessionId
 }
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@lanshi17/dsh-llm' {
   interface MessageSourceMap {
     coordinator: CoordinatorMessageSource
     'subagent-report': SubagentReportMessageSource

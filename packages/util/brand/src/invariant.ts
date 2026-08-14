@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-brand`.
- * @module @deepseek-ai/dsh-brand/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-brand`.
+ * @module @lanshi17/dsh-brand/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-brand'
+const PACKAGE_NAME = '@lanshi17/dsh-brand'
 
 /** Cordis companion plugin name. */
 export const name = 'brand-invariant'

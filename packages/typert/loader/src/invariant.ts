@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-typert-loader`.
- * @module @deepseek-ai/dsh-typert-loader/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-typert-loader`.
+ * @module @lanshi17/dsh-typert-loader/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-typert-loader'
+const PACKAGE_NAME = '@lanshi17/dsh-typert-loader'
 
 /** Cordis companion plugin name. */
 export const name = 'typert-loader-invariant'

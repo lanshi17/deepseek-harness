@@ -2,9 +2,9 @@
 /** Section, setup-card, and hand-written editor behavior over a scripted wire face. */
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import Schema from '@deepseek-ai/schemastery'
-import { bindSnapshotSelector } from '@deepseek-ai/dsh-client-web-react'
-import type { RpcResponse, SettingsNamespaceView } from '@deepseek-ai/dsh-api-remotes/client'
+import Schema from '@lanshi17/schemastery'
+import { bindSnapshotSelector } from '@lanshi17/dsh-client-web-react'
+import type { RpcResponse, SettingsNamespaceView } from '@lanshi17/dsh-api-remotes/client'
 import {
   ModelsSection, needsSetup, providerCopy, providerTargetLabel, removeProviderProfile,
 } from '../src/client/ModelsSection.tsx'

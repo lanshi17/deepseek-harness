@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-native-command`.
- * @module @deepseek-ai/dsh-native-command/invariant
+ * Package-owned invariant companion for `@lanshi17/dsh-native-command`.
+ * @module @lanshi17/dsh-native-command/invariant
  */
 
 /* jscpd:ignore-start */
-import type { Context } from '@deepseek-ai/cordis'
-import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
+import type { Context } from '@lanshi17/cordis'
+import type { InvariantInstaller } from '@lanshi17/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-native-command'
+const PACKAGE_NAME = '@lanshi17/dsh-native-command'
 
 /** Cordis companion plugin name. */
 export const name = 'native-command-invariant'

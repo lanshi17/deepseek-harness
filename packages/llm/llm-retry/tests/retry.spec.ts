@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, expectTypeOf, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import type { Fiber } from '@deepseek-ai/cordis'
-import LlmRuntime, { createUserMessage, CallId, EMPTY_RESPONSE_CODE, LlmAdapter, LlmError, resolveRetryPolicy  } from '@deepseek-ai/dsh-llm'
+import { Context } from '@lanshi17/cordis'
+import type { Fiber } from '@lanshi17/cordis'
+import LlmRuntime, { createUserMessage, CallId, EMPTY_RESPONSE_CODE, LlmAdapter, LlmError, resolveRetryPolicy  } from '@lanshi17/dsh-llm'
 import type {
   AlwaysRetryPolicyConfig,
   BackoffConfig,
@@ -10,15 +10,15 @@ import type {
   ResolvedRetryPolicy,
   RetryPolicyConfig,
   StreamChunk,
-} from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent, SessionEventMap } from '@deepseek-ai/dsh-session'
-import type { LlmRetryEventData } from '@deepseek-ai/dsh-llm-retry/types'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent, RequestErrorAction } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
+} from '@lanshi17/dsh-llm'
+import SessionStore, { SessionId } from '@lanshi17/dsh-session'
+import type { SessionEvent, SessionEventMap } from '@lanshi17/dsh-session'
+import type { LlmRetryEventData } from '@lanshi17/dsh-llm-retry/types'
+import SystemPrompt from '@lanshi17/dsh-system-prompt'
+import ToolRuntime, { defineContentToolFixture } from '@lanshi17/dsh-tools'
+import AgentRegistry from '@lanshi17/dsh-agent'
+import type { Agent, RequestErrorAction } from '@lanshi17/dsh-agent'
+import AgentLoop from '@lanshi17/dsh-agent-loop'
 import * as retry from '../src/index.ts'
 
 type ScriptEntry = Error | Iterable<StreamChunk> | AsyncIterable<StreamChunk>

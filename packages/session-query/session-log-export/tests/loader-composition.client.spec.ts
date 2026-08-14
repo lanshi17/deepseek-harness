@@ -3,13 +3,13 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { afterEach, describe, expect, it } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import Loader from '@deepseek-ai/cordis-plugin-loader'
-import Include from '@deepseek-ai/cordis-plugin-include'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import CommandRuntime from '@deepseek-ai/dsh-commands'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import * as SessionLogDownload from '@deepseek-ai/dsh-session-log-export'
+import { Context } from '@lanshi17/cordis'
+import Loader from '@lanshi17/cordis-plugin-loader'
+import Include from '@lanshi17/cordis-plugin-include'
+import type { Agent } from '@lanshi17/dsh-agent'
+import CommandRuntime from '@lanshi17/dsh-commands'
+import SessionStore, { SessionId } from '@lanshi17/dsh-session'
+import * as SessionLogDownload from '@lanshi17/dsh-session-log-export'
 
 let root: string | undefined
 let context: Context | undefined
@@ -26,9 +26,9 @@ describe('session-log-download real Loader composition', () => {
     root = await mkdtemp(join(tmpdir(), 'dsh-session-export-loader-'))
     const configPath = join(root, 'cordis.yml')
     await writeFile(configPath, [
-      "- name: '@deepseek-ai/dsh-session'",
-      "- name: '@deepseek-ai/dsh-commands'",
-      "- name: '@deepseek-ai/dsh-session-log-export'",
+      "- name: '@lanshi17/dsh-session'",
+      "- name: '@lanshi17/dsh-commands'",
+      "- name: '@lanshi17/dsh-session-log-export'",
       '',
     ].join('\n'))
 
@@ -37,9 +37,9 @@ describe('session-log-download real Loader composition', () => {
     await context.plugin(Loader)
     context.loader.builtins.include = Include
     const modules = new Map<string, unknown>([
-      ['@deepseek-ai/dsh-session', SessionStore],
-      ['@deepseek-ai/dsh-commands', CommandRuntime],
-      ['@deepseek-ai/dsh-session-log-export', SessionLogDownload],
+      ['@lanshi17/dsh-session', SessionStore],
+      ['@lanshi17/dsh-commands', CommandRuntime],
+      ['@lanshi17/dsh-session-log-export', SessionLogDownload],
     ])
     context.loader.internal = {
       version: 'v2',

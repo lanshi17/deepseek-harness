@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { Context } from '@deepseek-ai/cordis'
-import { createScope, scopeOf } from '@deepseek-ai/dsh-scope'
-import type { Scope, ScopeKey } from '@deepseek-ai/dsh-scope'
-import SystemPrompt, { TOOL_ORDER_REST, renderContextSnapshot, renderPrompt } from '@deepseek-ai/dsh-system-prompt'
-import type { Config, PromptAssembly } from '@deepseek-ai/dsh-system-prompt'
+import { Context } from '@lanshi17/cordis'
+import { createScope, scopeOf } from '@lanshi17/dsh-scope'
+import type { Scope, ScopeKey } from '@lanshi17/dsh-scope'
+import SystemPrompt, { TOOL_ORDER_REST, renderContextSnapshot, renderPrompt } from '@lanshi17/dsh-system-prompt'
+import type { Config, PromptAssembly } from '@lanshi17/dsh-system-prompt'
 
 async function mount(config: Config = {}): Promise<Context> {
   const ctx = new Context()

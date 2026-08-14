@@ -1,9 +1,9 @@
-import type { Context } from '@deepseek-ai/cordis'
+import type { Context } from '@lanshi17/cordis'
 import type {
   AssistantMessageNode, ConversationNode, ConversationPromptSnapshot,
   ConversationViewBuilder, ConversationViewDefinition, RequestView,
   ToolCallBlock,
-} from '@deepseek-ai/dsh-client-runtime/client'
+} from '@lanshi17/dsh-client-runtime/client'
 import type {
   TrajectoryConversationViewNode, TrajectoryRequestHeaderState,
   TrajectorySnapshot,

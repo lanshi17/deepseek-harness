@@ -9,9 +9,9 @@ import { fileURLToPath } from 'node:url'
 import type { Browser, Page } from 'playwright'
 import { chromium } from 'playwright'
 import { afterAll, beforeAll, describe, expect, it, onTestFailed } from 'vitest'
-import { credentialRef } from '@deepseek-ai/dsh-credentials'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
-import { WEB_SEARCH_MAX_RESULTS } from '@deepseek-ai/dsh-tool-web'
+import { credentialRef } from '@lanshi17/dsh-credentials'
+import type { SessionEvent } from '@lanshi17/dsh-session'
+import { WEB_SEARCH_MAX_RESULTS } from '@lanshi17/dsh-tool-web'
 import {
   assertFixtureInventory, captureStableAria, compareOrRefreshGolden, fixtureUserPrompts,
   launchWebScaffold, recordFixture, watchConsole, webSnapshotMode, type WebScaffold,
