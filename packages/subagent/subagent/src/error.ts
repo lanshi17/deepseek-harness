@@ -25,6 +25,8 @@ export type SubagentErrorCode =
   | 'PRESET_SELECTION_DISABLED'
   /** The selected agent preset is outside the tool's allowlist. */
   | 'PRESET_NOT_ALLOWED'
+  /** A tool alias from a user model mention is unknown. */
+  | 'MODEL_MENTION_NOT_FOUND'
   /** The tool instance does not accept child model selection. */
   | 'MODEL_SELECTION_DISABLED'
   /** The enabled Host model-selection setting has invalid routes; correct the setting before retrying. */

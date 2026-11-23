@@ -12,6 +12,7 @@ import type {} from '@deepseek-ai/dsh-agent-preset-registry'
 import { defineTool, ToolContextUnavailableError } from '@deepseek-ai/dsh-tools'
 import type { ToolDefinition } from '@deepseek-ai/dsh-tools'
 import type { AgentOptions } from '@deepseek-ai/dsh-agent'
+import { readModelMentions, renderModelMentions, resolveModelMention } from './model-mentions.ts'
 import type { ReasoningEffortId } from '@deepseek-ai/dsh-llm/types'
 import type { ContentBlock } from '@deepseek-ai/dsh-llm'
 import {
@@ -249,6 +250,10 @@ export function apply(ctx: Context, config: Config): void {
             type: 'string' as const,
             description: 'Model id within that provider; requires `provider`.',
           },
+          agent: {
+            type: 'string' as const,
+            description: 'Alias (m1, m2, …) from a user `^model` mention; resolves the route and ignores provider/model fields.',
+          },
           reasoning_effort: {
             type: 'string' as const,
             description: 'Reasoning effort id; requires `provider` and `model`. Omit to use that model\'s default effort.',
@@ -276,6 +281,19 @@ export function apply(ctx: Context, config: Config): void {
         }
 
         const agentPreset = presets.resolve(args as PresetSelectionRequest)
+        if (typeof args.agent === 'string') {
+          const mention = resolveModelMention(parent.session, args.agent)
+          if (mention === undefined) {
+            throw new SubagentError(`unknown model mention "${args.agent}"; mention a model in the prompt first`, 'MODEL_MENTION_NOT_FOUND')
+          }
+          args = {
+            ...args,
+            provider: mention.provider,
+            model: mention.model,
+            ...mention.effort === undefined ? {} : { reasoning_effort: mention.effort },
+            ...args.name === undefined ? { name: mention.agent } : {},
+          }
+        }
         const modelRequest = delegationModelRequest(args as DelegationModelRequest)
         const routes = modelSelectionEnabled && hasDelegationModelRequest(modelRequest)
           ? ctx.get('subagentModelSelection')?.allowedRoutes()
@@ -377,6 +395,18 @@ export function apply(ctx: Context, config: Config): void {
       const names = visible.map(name => `\`${name}\``).join(' or ')
       return `Start independent delegations with ${names} together in one assistant message and continue useful work while they run. When only waiting for their results remains, end your turn instead of sleeping or polling; the next result starts a new turn. Collect the subagent results required to complete the task before giving the user a final answer.\n\nBash, formatters, code generators, and scripts can overwrite concurrent edits without conflict detection; coordinate their changes explicitly. The agent integrating the work must review the final diff and run relevant tests.`
     },
+  })
+  ctx.systemPrompt.section({
+    name: `tool:${toolName}:model-mentions`,
+    order: ctx.systemPrompt.getSectionOrder('TOOL_SUBAGENT'),
+    text: (context) => {
+      if (!modelSelectionEnabled || context.agent === undefined) return ''
+      return renderModelMentions(readModelMentions(context.agent.session), toolName)
+    },
+  })
+  ctx.on('session/event', (session, event) => {
+    if (!modelSelectionEnabled || event.type !== 'user/message') return
+    if (readModelMentions(session).length > 0) ctx.emit('system-prompt/change')
   })
   ctx.systemPrompt.context({
     name: `tool:${toolName}:depth`,
